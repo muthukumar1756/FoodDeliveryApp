@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7521cde6-4d82-4301-b706-e5c3ff32b573" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/swiggy/controller/FoodOrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/model/Food.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/model/Food.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/model/Restaurant.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/model/Restaurant.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/view/CartView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/view/CartView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/view/RestaurantView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/view/RestaurantView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/view/UserView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/view/UserView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/controller/RestaurantController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/model/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/model/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/model/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/model/Restaurant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/service/RestaurantService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/view/CartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/view/CartView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/view/RestaurantView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/view/RestaurantView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/view/UserView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/view/UserView.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2YcfOPhnIUYBPijiTpM0WNte8Ca" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/java/Projects java/FoodDeliveryApp&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;D:/java/Projects java/FoodDeliveryApp/src/Main.java&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7521cde6-4d82-4301-b706-e5c3ff32b573" name="Changes" comment="" />
+      <created>1700829757917</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1700829757917</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="e50fe77e-37ee-4055-9e62-75d5c1ba13b3" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="e50fe77e-37ee-4055-9e62-75d5c1ba13b3">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="git commit -m &quot;first commit&quot;" />
+    <MESSAGE value="first commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
