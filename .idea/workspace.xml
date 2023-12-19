@@ -5,28 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7521cde6-4d82-4301-b706-e5c3ff32b573" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/swiggy/controller/FoodOrderController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/swiggy/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/swiggy/controller/CartController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/model/Food.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/model/Food.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/model/Restaurant.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/model/Restaurant.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/model/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/view/CartView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/view/CartView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/view/RestaurantView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/view/RestaurantView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/view/UserView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/view/UserView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/swiggy/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/swiggy/controller/RestaurantController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/swiggy/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/swiggy/model/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/model/Food.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/swiggy/model/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/model/Restaurant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/swiggy/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/swiggy/service/RestaurantService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/swiggy/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/swiggy/view/CartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/view/CartView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/swiggy/view/RestaurantView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/view/RestaurantView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/swiggy/view/UserView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/swiggy/view/UserView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/controller/CartController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/controller/FoodOrderController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/controller/RestaurantController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/controller/UserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/model/Cart.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/model/Food.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/model/Restaurant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/model/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/service/CartService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/service/FoodOrderService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/service/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/view/CartView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/view/RestaurantView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/view/UserView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/swiggy/view/validation/UserValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/controller/CartController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/controller/FoodOrderController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/model/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/model/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/model/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/model/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/model/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/model/Restaurant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/service/CartService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/service/FoodOrderService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/view/CartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/view/CartView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/view/RestaurantView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/view/RestaurantView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/view/UserView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/view/UserView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/swiggy/view/validation/UserValidation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/view/validation/UserValidation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +66,7 @@
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectViewState">
+    <option name="foldersAlwaysOnTop" value="false" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
@@ -81,6 +94,7 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="OPEN_GENERIC_TABS">
       <map>
+        <entry key="be5056fa-4c87-49bf-b948-5a181f224837" value="TOOL_WINDOW" />
         <entry key="e50fe77e-37ee-4055-9e62-75d5c1ba13b3" value="TOOL_WINDOW" />
       </map>
     </option>
@@ -89,6 +103,31 @@
         <entry key="MAIN">
           <value>
             <State />
+          </value>
+        </entry>
+        <entry key="be5056fa-4c87-49bf-b948-5a181f224837">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
           </value>
         </entry>
         <entry key="e50fe77e-37ee-4055-9e62-75d5c1ba13b3">
