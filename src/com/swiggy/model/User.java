@@ -5,14 +5,13 @@ import java.util.List;
 
 public class User {
 
-    private  String name;
+    private static int idCount;
+    private final List<Food> cart = new ArrayList<>();
+    private final int id;
+    private String name;
     private String phoneNumber;
     private String password;
     private String emailId;
-    private  int id;
-    private static int idCount;
-
-    private List<Food> cart = new ArrayList<>();
 
     public User(final String name, final String phoneNumber,  final String emailId, final String password) {
         this.name = name;
@@ -34,11 +33,15 @@ public class User {
         return phoneNumber;
     }
 
+    public void setPhoneNumber(final String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public List<Food> getCart() {
         return cart;
     }
 
-    public void addFoodToCart(Food selectedFood) {
+    public void addFoodToCart(final Food selectedFood) {
         cart.add(selectedFood);
     }
 
@@ -48,5 +51,9 @@ public class User {
 
     public String getEmailId() {
         return emailId;
+    }
+
+    public void setEmailId(final String emailId) {
+        this.emailId = emailId;
     }
 }

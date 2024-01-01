@@ -2,32 +2,22 @@ package com.swiggy.model;
 
 public class Food {
 
-    private final int FOOD_ID;
-    private static int foodIdCount;
-    private final String NAME;
-    private int rate;
-    private String type;
-    private boolean isVeg;
-    private int foodQuantity;
+    private final String name;
+    private final int rate;
+    private final String type;
+    private final boolean isVeg;
+    private final int foodQuantity;
 
-    public Food(String name, int rate, String type, boolean isVeg) {
-        this.NAME = name;
+    public Food(final String name, final int rate, final String type, final boolean isVeg, final int foodQuantity) {
+        this.name = name;
         this.rate = rate;
         this.type = type;
-        this.FOOD_ID = ++foodIdCount;
-        this.isVeg = isVeg;
-    }
-    public Food(String name, int rate, String type, boolean isVeg, int foodQuantity) {
-        this.NAME = name;
-        this.rate = rate;
-        this.type = type;
-        this.FOOD_ID = ++foodIdCount;
         this.isVeg = isVeg;
         this.foodQuantity = foodQuantity;
     }
 
     public String getName() {
-        return NAME;
+        return name;
     }
 
     public int getRate() {
@@ -38,11 +28,11 @@ public class Food {
         return type;
     }
 
-    public int getFoodId() {
-        return FOOD_ID;
-    }
-
     public boolean isVeg() {
         return isVeg;
+    }
+
+    public int getFoodQuantity() {
+        return foodQuantity;
     }
 }

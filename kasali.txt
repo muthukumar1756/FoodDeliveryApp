@@ -1,0 +1,7 @@
+#kasali (name,rate,type,isVeg,quantity,restaurantname)
+
+1=Chicken Briyani,100,NonVeg,false,5,kasali
+2=Parotta,15,Veg,true,5,kasali
+3=Meals,120,Veg,true,5,kasali
+4=Chicken Rice,110,NonVeg,false,5,kasali
+5=Chicken Noodles,90,NonVeg,false,5,kasali

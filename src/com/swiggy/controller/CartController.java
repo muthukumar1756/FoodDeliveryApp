@@ -21,4 +21,7 @@ public class CartController {
     public void addSelectedFoodToCart(final Food selectedFood, final User currentUser) {
         currentUser.addFoodToCart(selectedFood);
     }
+    public void addSelectedFoodToCart(final Food selectedFood, final User currentUser, final int quantity) {
+        currentUser.addFoodToCart(selectedFood);
+    }
 }

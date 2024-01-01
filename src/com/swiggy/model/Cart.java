@@ -2,18 +2,18 @@ package com.swiggy.model;
 
 public class Cart {
 
-    private String name;
-    private int rate;
-    private String type;
+    private final String NAME;
+    private final int rate;
+    private final String type;
 
-    Cart(String name, int rate, String type){
-        this.name = name;
+    Cart(final String name, final int rate, final String type){
+        this.NAME = name;
         this.rate = rate;
         this.type = type;
     }
 
     public String getName() {
-        return name;
+        return NAME;
     }
 
     public int getRate() {

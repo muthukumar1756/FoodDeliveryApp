@@ -2,12 +2,14 @@ package com.swiggy.controller;
 
 import com.swiggy.model.Restaurant;
 import com.swiggy.service.RestaurantService;
+import com.swiggy.service.impl.RestaurantServiceImpl;
 
 import java.util.Map;
 
 public class RestaurantController {
+
     private static RestaurantController instance;
-    private static final RestaurantService RESTAURANT_SERVICE_INSTANCE = RestaurantService.getInstance();
+    private static final RestaurantService RESTAURANT_SERVICE = RestaurantServiceImpl.getInstance();
 
     private RestaurantController() {
     }
@@ -20,14 +22,14 @@ public class RestaurantController {
     }
 
     public Map<Integer, Restaurant> getRestaurantsList(){
-        return RESTAURANT_SERVICE_INSTANCE.getRestaurants();
+        return RESTAURANT_SERVICE.getRestaurants();
     }
 
-    public void setRestaurants(Integer restaurantId, Restaurant restaurant) {
-        RESTAURANT_SERVICE_INSTANCE.setRestaurantDetails(restaurantId, restaurant);
+    public void setRestaurants(final Integer restaurantId, final Restaurant restaurant) {
+        RESTAURANT_SERVICE.setRestaurantDetails(restaurantId, restaurant);
     }
 
-    public void setFoodToMenuCard(String name, int rate, String type, boolean isVeg, Restaurant restaurant) {
-        RESTAURANT_SERVICE_INSTANCE.addFoodToMenucard(name, rate, type, isVeg, restaurant);
+    public void setFoodToMenuCard(final String name, final int rate, final String type, final boolean isVeg, final int foodQuantity, final Restaurant restaurant) {
+        RESTAURANT_SERVICE.setFood(name, rate, type, isVeg, foodQuantity, restaurant);
     }
 }

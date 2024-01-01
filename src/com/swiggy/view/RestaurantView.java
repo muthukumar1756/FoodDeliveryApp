@@ -2,22 +2,25 @@ package com.swiggy.view;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import com.swiggy.controller.CartController;
 import com.swiggy.controller.RestaurantController;
 import com.swiggy.model.Food;
 import com.swiggy.model.Restaurant;
 import com.swiggy.model.User;
-
-import static com.swiggy.view.UserView.scanner;
+import com.swiggy.view.validation.UserDataValidator;
 
 public class RestaurantView {
 
     private static RestaurantView instance;
-    private static final CartController CART_CONTROLLER_INSTANCE = CartController.getInstance();
-    private static final RestaurantController RESTAURANT_CONTROLLER_INSTANCE = RestaurantController.getInstance();
-    private static final CartView CART_VIEW_INSTANCE = CartView.getInstance();
-    private static final Map <Integer, Restaurant> RESTAURANTS = RESTAURANT_CONTROLLER_INSTANCE.getRestaurantsList();
+    private static final Scanner SCANNER = ScannerInstance.getInstance();
+    private static final CartController CART_CONTROLLER = CartController.getInstance();
+    private static final RestaurantController RESTAURANT_CONTROLLER = RestaurantController.getInstance();
+    private static final CartView CART_VIEW = CartView.getInstance();
+    private static final UserView USER_VIEW = UserView.getInstance();
+    private static final Map<Integer, Restaurant> RESTAURANTS = RESTAURANT_CONTROLLER.getRestaurantsList();
+    private static final UserDataValidator USER_DATA_VALIDATOR = UserDataValidator.getInstance();
 
     private RestaurantView() {
     }
@@ -31,67 +34,99 @@ public class RestaurantView {
     }
 
     public void displayRestaurants(final User currentUser) {
-        System.out.println("Available restaurants:");
-        System.out.println("Hotel id" + " " + " Hotel Name");
+        System.out.println("To Go Back Enter *\nAvailable Restaurants:");
 
-        for (Map.Entry<Integer, Restaurant> restaurants : RESTAURANTS.entrySet()) {
-            int restaurantId = restaurants.getKey();
-            Restaurant restaurant = restaurants.getValue();
+        for (final Map.Entry<Integer, Restaurant> restaurants : RESTAURANTS.entrySet()) {
+            final int restaurantId = restaurants.getKey();
+            final Restaurant restaurant = restaurants.getValue();
+            String restaurantData = String.format("%d %s",restaurantId,restaurant.getName());
 
-            System.out.println( restaurantId + " " + restaurant.getName());
+            System.out.println(restaurantData);
         }
-            selectRestaurant(currentUser);
+        selectRestaurant(currentUser);
     }
 
-    public void selectRestaurant(final User currentUser) {
-        int restaurantNumber = scanner.nextInt();
-        Restaurant selectedRestaurant = RESTAURANTS.get(restaurantNumber);
+    private void selectRestaurant(final User currentUser) {
+        final String restaurantNumber = SCANNER.nextLine().trim();
 
-        selectFood(selectedRestaurant, currentUser);
+        if (USER_DATA_VALIDATOR.validateBackOption(restaurantNumber)) {
+            USER_VIEW.displayUserOptions(currentUser);
+        }
+        final Restaurant selectedRestaurant = RESTAURANTS.get(Integer.parseInt(restaurantNumber));
+
+        printMenuCard(selectedRestaurant, currentUser);
     }
 
-    public void selectFood(final Restaurant selectedRestaurant, final User currentUser) {
+    private void printMenuCard(final Restaurant selectedRestaurant, final User currentUser) {
         List<Food> selectedRestaurantMenuCard = null;
 
         try {
             selectedRestaurantMenuCard = selectedRestaurant.getMenuCard();
         } catch (NullPointerException e) {
-            System.out.println("Enter valid option");
+            System.out.println("Enter Valid Option");
             displayRestaurants(currentUser);
         }
+        System.out.println("\nAvailable Items:\n");
 
-        System.out.println("Available Items:");
         for (final Food food : selectedRestaurantMenuCard) {
             System.out.println((selectedRestaurantMenuCard.indexOf(food) + 1) + " " + food.getName() + " " + food.getRate() + " " + food.getType());
         }
-
         selectFilter(selectedRestaurant, currentUser, selectedRestaurantMenuCard);
     }
 
-    private void selectFilter(final Restaurant selectedRestaurant, final User currentUser, List<Food> selectedRestaurantMenuCard) {
-        System.out.println("\nFor Filter enter 1 else enter 2");
-        int filterOption = scanner.nextInt();
+    private void selectFilter(final Restaurant selectedRestaurant, final User currentUser, final List<Food> selectedRestaurantMenuCard) {
+        System.out.println("\n1.To Apply Filter\n2.To Continue Food Ordering\n3.To Select Other Restaurant");
+        final String userChoice = SCANNER.nextLine();
 
-        switch (filterOption) {
+        if (USER_DATA_VALIDATOR.validateBackOption(userChoice)) {
+            USER_VIEW.displayUserOptions(currentUser);
+        }
+        switch (Integer.parseInt(userChoice)) {
             case 1:
-                filterView(selectedRestaurant, currentUser);
+                selectFilterType(selectedRestaurant, currentUser, selectedRestaurantMenuCard);
                 break;
             case 2:
                 addFoodToCart(selectedRestaurant, currentUser, selectedRestaurantMenuCard);
                 break;
+            case 3:
+                displayRestaurants(currentUser);
+                break;
             default:
-                System.out.println("Invalid option try again\n");
-                selectFood(selectedRestaurant, currentUser);
+                System.out.println("Invalid Option Try Again\n");
+                printMenuCard(selectedRestaurant, currentUser);
         }
     }
 
-    private void filterView (final Restaurant selectedRestaurant, final User currentUser) {
-        System.out.println("Filter Type");
-        System.out.println("1.Veg");
-        System.out.println("2.Non-Veg");
-        int filterTypeOption = scanner.nextInt();
+    private void addFoodToCart(final Restaurant selectedRestaurant, final User currentUser, final List<Food> selectedRestaurantMenuCard) {
+        try {
+            System.out.println("Enter FoodId to order");
+            final String foodNumber = SCANNER.nextLine().trim();
 
-        switch (filterTypeOption) {
+            if (USER_DATA_VALIDATOR.validateBackOption(foodNumber)) {
+                displayRestaurants(currentUser);
+            }
+            final Food selectedFood = selectedRestaurantMenuCard.get(Integer.parseInt(foodNumber) - 1);
+            System.out.println("Enter The Quantity");
+            final int quantity = Integer.parseInt(SCANNER.nextLine());
+
+            CART_CONTROLLER.addSelectedFoodToCart(selectedFood, currentUser);
+            CART_CONTROLLER.addSelectedFoodToCart(selectedFood, currentUser, quantity);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Enter A Valid Option From The Menucard");
+            printMenuCard(selectedRestaurant, currentUser);
+        }
+        addMoreFood(selectedRestaurant, currentUser);
+    }
+
+    private void selectFilterType(final Restaurant selectedRestaurant, final User currentUser, final List<Food> selectedRestaurantMenuCard) {
+        System.out.println("\nFilter Type\n1.Veg\n2.Non-Veg");
+        final String filterTypeOption = SCANNER.nextLine().trim();
+
+        if (USER_DATA_VALIDATOR.validateBackOption(filterTypeOption)) {
+            selectFilter(selectedRestaurant, currentUser, selectedRestaurantMenuCard);
+        }
+
+        switch (Integer.parseInt(filterTypeOption)) {
             case 1:
                 selectVegFood(selectedRestaurant, currentUser);
                 break;
@@ -100,12 +135,12 @@ public class RestaurantView {
                 break;
             default:
                 System.out.println("Enter valid option");
-                filterView(selectedRestaurant, currentUser);
+                selectFilterType(selectedRestaurant, currentUser, selectedRestaurantMenuCard);
         }
     }
 
-    public void selectVegFood(final Restaurant selectedRestaurant, final User currentUser) {
-        List<Food> selectedRestaurantMenuCard = selectedRestaurant.getVegMenuCard();
+    private void selectVegFood(final Restaurant selectedRestaurant, final User currentUser) {
+        final List<Food> selectedRestaurantMenuCard = selectedRestaurant.getVegMenuCard();
 
         System.out.println("Available Items:");
         for (final Food food : selectedRestaurantMenuCard) {
@@ -114,49 +149,36 @@ public class RestaurantView {
         addFoodToCart(selectedRestaurant, currentUser, selectedRestaurantMenuCard);
     }
 
-    public void selectNonVegFood(final Restaurant selectedRestaurant, final User currentUser) {
-        List<Food> selectedRestaurantMenuCard = selectedRestaurant.getNonVegMenuCard();
+    private void selectNonVegFood(final Restaurant selectedRestaurant, final User currentUser) {
+        final List<Food> selectedRestaurantMenuCard = selectedRestaurant.getNonVegMenuCard();
 
-        System.out.println("Available Items:");
+        System.out.println("\nAvailable Items:");
+
         for (final Food food : selectedRestaurantMenuCard) {
             System.out.println((selectedRestaurantMenuCard.indexOf(food) + 1) + " " + food.getName() + " " + food.getRate() + " " + food.getType());
         }
         addFoodToCart(selectedRestaurant, currentUser, selectedRestaurantMenuCard);
-    }
-
-    public void addFoodToCart (final Restaurant selectedRestaurant, final User currentUser, final List<Food> selectedRestaurantMenuCard) {
-        try {
-            System.out.println("Enter the food id to order");
-            int foodNumber = scanner.nextInt();
-            Food selectedFood = selectedRestaurantMenuCard.get(foodNumber - 1);
-
-            CART_CONTROLLER_INSTANCE.addSelectedFoodToCart(selectedFood, currentUser);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Enter a valid option from the Menucard");
-            selectFood(selectedRestaurant, currentUser);
-        }
-        addMoreFood(selectedRestaurant, currentUser);
     }
 
     public void addMoreFood(final Restaurant selectedRestaurant, final User currentUser) {
-        System.out.println("Do you want to add more food");
-        System.out.println("1.Yes go to Menucard");
-        System.out.println("2.No go to cart");
-        int option = scanner.nextInt();
+        System.out.println("Do You Want To Add More Food\n1.Yes Go To MenuCard\n2.No Go To Cart");
+        final String userChoice = SCANNER.nextLine().trim();
 
-        switch (option) {
+        if (USER_DATA_VALIDATOR.validateBackOption(userChoice)) {
+            printMenuCard(selectedRestaurant, currentUser);
+        }
+        switch (Integer.parseInt(userChoice)) {
             case 1:
-                selectFood(selectedRestaurant, currentUser);
+                printMenuCard(selectedRestaurant, currentUser);
                 break;
             case 2:
-                List<Food> userCart = currentUser.getCart();
+                final List<Food> userCart = currentUser.getCart();
 
-                CART_VIEW_INSTANCE.printCart(userCart, currentUser);
+                CART_VIEW.printCart(selectedRestaurant, userCart, currentUser);
                 break;
             default:
-                System.out.println("Enter a valid option");
+                System.out.println("Enter A Valid Option");
                 addMoreFood(selectedRestaurant, currentUser);
         }
     }
-
 }

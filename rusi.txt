@@ -1,0 +1,7 @@
+#rusi (name,rate,type,isVeg,quantity,restaurantname)
+
+1=Briyani,80,Veg,true,5,rusi
+2=Parotta,12,Veg,true,5,rusi
+3=Fish Meals,100,NonVeg,true,5,rusi
+4=Chicken Rice,120,NonVeg,false,5,rusi
+5=Egg Noodles,80,NonVeg,false,5,rusi

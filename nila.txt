@@ -1,0 +1,7 @@
+#nila (name,rate,type,isVeg,quantity,restaurantname)
+
+1=Mutton Briyani,120,NonVeg,false,5,nila
+2=Parotta,10,Veg,true,5,nila
+3=Meals,80,Veg,true,5,nila
+4=Chicken Rice,100,NonVeg,false,5,nila
+5=Chicken Noodles,75,NonVeg,false,5,nila

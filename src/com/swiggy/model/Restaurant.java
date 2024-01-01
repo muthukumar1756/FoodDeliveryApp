@@ -5,25 +5,24 @@ import java.util.List;
 
 public class Restaurant {
 
-    private final String NAME;
-    private final int ID;
     private static int idCount;
+    private final String name;
+    private final int id;
+    private final List<Food> menuCard = new ArrayList<>();
+    private final List<Food> vegMenuCard = new ArrayList<>();
+    private final List<Food> nonVegMenuCard = new ArrayList<>();
 
-    private List<Food> menuCard = new ArrayList<>();
-    private List<Food> vegMenuCard = new ArrayList<>();
-    private List<Food> nonVegMenuCard = new ArrayList<>();
-
-    public Restaurant(String NAME) {
-        this.NAME = NAME;
-        this.ID = ++idCount;
+    public Restaurant(final String name) {
+        this.name = name;
+        this.id = ++idCount;
     }
 
     public String getName() {
-        return NAME;
+        return name;
     }
 
     public int getId() {
-        return ID;
+        return id;
     }
 
     public void setMenuCard() {
@@ -31,12 +30,12 @@ public class Restaurant {
         menuCard.addAll(nonVegMenuCard);
     }
 
-    public void setVegMenuCard(String name, int rate, String type, boolean isVeg) {
-        vegMenuCard.add(new Food(name, rate, type, isVeg));
+    public void setVegMenuCard(final String name, final int rate, final String type, final boolean isVeg, final int foodQuantity) {
+        vegMenuCard.add(new Food(name, rate, type, isVeg, foodQuantity));
     }
 
-    public void setNonVegMenuCard(String name, int rate, String type, boolean isVeg) {
-        nonVegMenuCard.add(new Food(name, rate, type, isVeg));
+    public void setNonVegMenuCard(final String name, final int rate, final String type, final boolean isVeg, final int foodQuantity) {
+        nonVegMenuCard.add(new Food(name, rate, type, isVeg, foodQuantity));
     }
 
     public List<Food> getVegMenuCard(){
@@ -50,5 +49,4 @@ public class Restaurant {
     public List<Food> getMenuCard(){
         return menuCard;
     }
-
 }
