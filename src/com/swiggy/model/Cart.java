@@ -1,26 +1,35 @@
 package com.swiggy.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * <p>
+ * Represents cart entity with properties and methods.
+ * </p>
+ *
+ * @author Muthu kumar V
+ * @version 1.0
+ */
 public class Cart {
 
-    private final String NAME;
-    private final int rate;
-    private final String type;
+    private final Map<Food, Integer> cart;
 
-    Cart(final String name, final int rate, final String type){
-        this.NAME = name;
-        this.rate = rate;
-        this.type = type;
+    public Cart() {
+        this.cart = new HashMap<>();
     }
 
-    public String getName() {
-        return NAME;
+    public void addFood(final Food food, final int quantity) {
+        if (null ==  cart.get(food)){
+            cart.put(food, quantity);
+        } else {
+            final int currentQuantity = cart.get(food);
+
+            cart.put(food, currentQuantity + quantity);
+        }
     }
 
-    public int getRate() {
-        return rate;
-    }
-
-    public String getType() {
-        return type;
+    public Map<Food, Integer> getCart() {
+        return cart;
     }
 }

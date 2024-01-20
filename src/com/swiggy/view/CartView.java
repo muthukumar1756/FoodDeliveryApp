@@ -1,148 +1,194 @@
 package com.swiggy.view;
 
+import com.swiggy.controller.CartController;
+import com.swiggy.model.Cart;
 import com.swiggy.model.Food;
 import com.swiggy.model.Restaurant;
 import com.swiggy.model.User;
-import com.swiggy.view.validation.UserDataValidator;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Map;
 
-public class CartView {
+/**
+ * <p>
+ * Displays and updates the cart of the user
+ * </p>
+ *
+ * @author Muthu kumar V
+ * @version 1.0
+ */
+public class CartView extends CommonView {
 
-    private static CartView instance;
-    private static final RestaurantView RESTAURANT_VIEW = RestaurantView.getInstance();
-    private static final UserView USER_VIEW = UserView.getInstance();
-    public static final Scanner SCANNER = ScannerInstance.getInstance();
-    private static final UserDataValidator USER_DATA_VALIDATOR = UserDataValidator.getInstance();
-    private int totalAmount;
+    private static CartView cartView;
+
+    private final RestaurantView restaurantView;
+    private final CartController cartController;
+
+    private float totalAmount;
 
     private CartView() {
+        restaurantView = RestaurantView.getInstance();
+        cartController = CartController.getInstance();
     }
 
+    /**
+     * <p>
+     * Gets the object of the cart view class.
+     * </p>
+     *
+     * @return The cart view object
+     */
     public static CartView getInstance(){
-        if (instance == null) {
-            instance = new CartView();
+        if (null == cartView) {
+            cartView = new CartView();
         }
 
-        return instance;
+        return cartView;
     }
 
-    public void printCart(final Restaurant selectedRestaurant, final List<Food> userCart, final User currentUser) {
-        System.out.println("Items In Your Cart \n");
+    /**
+     * <p>
+     * Displays all the foods in the user cart.
+     * </p>
+     *
+     * @param restaurant Represents the {@link Restaurant} selected by the user
+     * @param user Represents the current {@link User}
+     */
+    public void printCart(final Restaurant restaurant, final User user) {
+        final Map<Food, Integer> cart = cartController.getCart(user);
+        printMessage("Items In Your Order \n");
 
-        for(final Food food : userCart){
+        for(final Food food : cart.keySet()){
             totalAmount += food.getRate();
+            final int quantity = cart.get(food);
+            int index = 1;
 
-            System.out.println((userCart.indexOf(food) + 1) + " " + food.getName() + " " + food.getRate() + " " + food.getType());
+            System.out.println(String.format("%d %s %.2f %s",
+                    index,
+                    food.getFoodName(),
+                    food.getRate() * quantity,
+                    food.getType()));
+            ++index;
         }
         System.out.println("Total Amount: " + totalAmount + "\n");
         totalAmount = 0;
 
-        manageCartChoice(selectedRestaurant, userCart, currentUser);
+        handleCartChoice(restaurant, cart, user);
     }
 
-    private void manageCartChoice(final Restaurant selectedRestaurant, final List<Food> userCart, final User currentUser) {
-        System.out.println("1.Place Order\n2.Remove Item From Cart\n3.Clear All Item From The Cart\n4.To Go Back And Add More Food");
-        final String userChoice = SCANNER.nextLine().trim();
+    /**
+     * <p>
+     * Handles the users choice to place order or remove food from the user cart.
+     * </p>
+     *
+     * @param restaurant Represents the {@link Restaurant} selected by the user
+     * @param cart Represents the {@link Cart} of the current user
+     * @param user Represents the current {@link User}
+     */
+    private void handleCartChoice(final Restaurant restaurant, final Map<Food, Integer> cart, final User user) {
+        printMessage("1.Place Order\n2.Remove Item From Order\n3.Clear All Item From The Order\n4.To Go Back And Add More Food");
+        final int userChoice = getChoice();
 
-        if (USER_DATA_VALIDATOR.validateBackOption(userChoice)) {
-            RESTAURANT_VIEW.addMoreFood(selectedRestaurant, currentUser);
+        if (-1 == userChoice) {
+            restaurantView.addFoodOrPlaceOrder(restaurant, user);
         }
-        switch (Integer.parseInt(userChoice)) {
+
+        switch (userChoice) {
             case 1:
-                placeOrder(selectedRestaurant, userCart, currentUser);
+                OrderView.getInstance().placeOrder(restaurant, cart, user);
                 break;
             case 2:
-                removeItem(selectedRestaurant, userCart, currentUser);
+                removeFood(restaurant, cart, user);
                 break;
             case 3:
-                clearAllCartItems(userCart, currentUser);
+                clearCart(cart, user);
                 break;
             case 4:
-                RESTAURANT_VIEW.addMoreFood(selectedRestaurant, currentUser);
+                restaurantView.addFoodOrPlaceOrder(restaurant, user);
                 break;
             default:
-                System.out.println("Enter A Valid Option");
-                manageCartChoice(selectedRestaurant, userCart, currentUser);
+                printMessage("Enter A Valid Option");
+                handleCartChoice(restaurant, cart, user);
         }
     }
 
-    private void placeOrder(final Restaurant selectedRestaurant, final List<Food> userCart, final User currentUser) {
-        if (userCart.isEmpty()) {
-            System.out.println("Your Cart Is Empty\nPlease Select A option From Below:\n1.Continue Ordering Foods\n2.Logout");
-            final String userChoice = SCANNER.nextLine().trim();
+    /**
+     * <p>
+     * Gets the users choice to remove the food from the user cart.
+     * </p>
+     *
+     * @param restaurant Represents the {@link Restaurant} selected by the user
+     * @param cart Represents the {@link Cart} of the current user
+     * @param user Represents the current {@link User}
+     */
+    private void removeFood(final Restaurant restaurant, final Map<Food, Integer> cart, final User user) {
+        printMessage("Enter The Item Number To Remove");
+        final int itemNumber = getChoice();
 
-            if (USER_DATA_VALIDATOR.validateBackOption(userChoice)) {
-                RESTAURANT_VIEW.addMoreFood(selectedRestaurant, currentUser);
-            }
-            switch (Integer.parseInt(userChoice)) {
-                case 1:
-                    RESTAURANT_VIEW.displayRestaurants(currentUser);
-                    break;
-                case 2:
-                    System.out.println("Your Account Is Logged Out");
-                    USER_VIEW.printMainMenu();
-                    break;
-                default:
-                    System.out.println("Enter A Valid Option");
-                    placeOrder(selectedRestaurant, userCart, currentUser);
+        if (-1 == itemNumber) {
+            printCart(restaurant, user);
+        }
+        final int selectedIndex = itemNumber - 1;
+
+        if (selectedIndex >= 0 && selectedIndex < cart.size()) {
+            final List<Food> foodCart = new ArrayList<>(cart.keySet());
+            final Food removeFood = foodCart.get(selectedIndex);
+
+            cart.remove(removeFood);
+
+            if (cartController.removeFood(user, removeFood)) {
+                printMessage("The Item Is Removed");
             }
         } else {
-            System.out.println("Enter Your Address");
-            final String address = SCANNER.nextLine().trim();
-
-            if (USER_DATA_VALIDATOR.validateBackOption(address)) {
-                printCart(selectedRestaurant, userCart, currentUser);
-            }
-            System.out.println("\n Your Order Is Placed..\nWill Shortly Delivered To This Address : "+ address);
-            continueOrdering(currentUser);
+            printMessage("Enter The Valid Item Number");
         }
+        printCart(restaurant, user);
     }
 
-    private void removeItem(final Restaurant selectedRestaurant, final List<Food> userCart, final User currentUser) {
-        System.out.println("Enter The Item Number To Remove");
-        final String itemNumber = SCANNER.nextLine().trim();
+    /**
+     * <p>
+     * Handles the users choice to display restaurant or logout.
+     * </p>
+     *
+     * @param user Represents the current {@link User}
+     */
+    public void displayRestaurantOrLogout(final User user) {
+        printMessage("1.Continue Food Ordering\n2.Logout");
+        final int userChoice = getChoice();
 
-        if (USER_DATA_VALIDATOR.validateBackOption(itemNumber)) {
-            printCart(selectedRestaurant, userCart, currentUser);
+        if (-1 == userChoice) {
+            restaurantView.displayRestaurants(user);
         }
 
-        try {
-            userCart.remove(Integer.parseInt(itemNumber) - 1);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Enter The Valid Item Number");
-            removeItem(selectedRestaurant, userCart, currentUser);
-        }
-        System.out.println("The Item Is Removed");
-        printCart(selectedRestaurant, userCart, currentUser);
-    }
-
-    private void continueOrdering(final User currentUser) {
-        System.out.println("1.Continue Food Ordering\n2.Logout");
-        final String userChoice = SCANNER.nextLine().trim();
-
-        if (USER_DATA_VALIDATOR.validateBackOption(userChoice)) {
-            RESTAURANT_VIEW.displayRestaurants(currentUser);
-        }
-
-        switch (Integer.parseInt(userChoice)) {
+        switch (userChoice) {
             case 1:
-                RESTAURANT_VIEW.displayRestaurants(currentUser);
+                restaurantView.displayRestaurants(user);
                 break;
             case 2:
-                System.out.println("Your Account Is Logged Out");
-                USER_VIEW.printMainMenu();
+                printMessage("Your Account Is Logged Out");
+                UserView.getInstance().displayMainMenu();
                 break;
             default:
-                System.out.println("Invalid Option");
-                continueOrdering(currentUser);
+                printMessage("Invalid Option");
+                displayRestaurantOrLogout(user);
         }
     }
 
-    private void clearAllCartItems(final List<Food> userCart, final User currentUser) {
-        userCart.clear();
-        System.out.println("Your Cart Is Empty");
-        continueOrdering(currentUser);
+    /**
+     * <p>
+     * Removes all the food from the user cart.
+     * </p>
+     *
+     * @param cart Represents the {@link Cart} of the current user
+     * @param user Represents the current {@link User}
+     */
+    private void clearCart(final Map<Food, Integer> cart, final User user) {
+        cart.clear();
+
+        if (cartController.clearCart(user)) {
+            printMessage("Your Order Is Empty");
+        }
+        displayRestaurantOrLogout(user);
     }
 }

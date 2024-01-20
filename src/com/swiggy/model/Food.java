@@ -1,35 +1,51 @@
 package com.swiggy.model;
 
+/**
+ * <p>
+ * Represents food entity with properties and methods.
+ * </p>
+ *
+ * @author Muthu kumar V
+ * @version 1.0
+ */
 public class Food {
 
     private final String name;
-    private final int rate;
-    private final String type;
-    private final boolean isVeg;
-    private final int foodQuantity;
+    private final float rate;
+    private final FoodType foodType;
 
-    public Food(final String name, final int rate, final String type, final boolean isVeg, final int foodQuantity) {
-        this.name = name;
+    private int id;
+    private int foodQuantity;
+
+    public Food(final String foodName, final float rate, final FoodType type, final int foodQuantity) {
+        this.name = foodName;
         this.rate = rate;
-        this.type = type;
-        this.isVeg = isVeg;
+        this.foodType = type;
         this.foodQuantity = foodQuantity;
     }
 
-    public String getName() {
+    public void setFoodId(final int id) {
+        this.id = id;
+    }
+
+    public void updateQuantity(int foodQuantity) {
+        this.foodQuantity = foodQuantity;
+    }
+
+    public int getFoodId() {
+        return id;
+    }
+
+    public String getFoodName() {
         return name;
     }
 
-    public int getRate() {
+    public float getRate() {
         return rate;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public boolean isVeg() {
-        return isVeg;
+    public FoodType getType() {
+        return foodType;
     }
 
     public int getFoodQuantity() {

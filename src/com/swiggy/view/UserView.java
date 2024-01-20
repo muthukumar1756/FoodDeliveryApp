@@ -2,229 +2,273 @@ package com.swiggy.view;
 
 import com.swiggy.controller.UserController;
 import com.swiggy.model.User;
+import com.swiggy.model.PasswordGenerator;
 import com.swiggy.view.validation.UserDataValidator;
 
-import java.util.Scanner;
+/**
+ * <p>
+ *  Handles user creation, authentication and updates.
+ * </p>
+ *
+ * @author Muthu kumar V
+ * @version 1.0
+ */
+public class UserView extends CommonView{
 
-public class UserView {
+    private static UserView userView;
 
-    private static UserView instance;
-    private static final Scanner SCANNER = ScannerInstance.getInstance();
-    private static final RestaurantView RESTAURANT_VIEW = RestaurantView.getInstance();
-    private static final UserController USER_CONTROLLER = UserController.getInstance();
-    private static final UserDataValidator USER_DATA_VALIDATOR = UserDataValidator.getInstance();
+    private final UserController userController;
+    private final UserDataValidator userDataValidator;
 
     private UserView() {
+        userController = UserController.getInstance();
+        userDataValidator = UserDataValidator.getInstance();
+        PasswordGenerator passwordGenerator = PasswordGenerator.getInstance();
     }
 
+    /**
+     * <p>
+     * Gets the object of the user view class.
+     * </p>
+     *
+     * @return The user view object
+     */
     public static UserView getInstance() {
-        if (instance == null) {
-            instance = new UserView();
+        if (null == userView) {
+            userView = new UserView();
         }
 
-        return instance;
+        return userView;
     }
 
-    public void printMainMenu() {
-        System.out.println("1.Signup\n2.Login");
-        final int UserChoice = Integer.parseInt(SCANNER.nextLine().trim());
+    /**
+     * <p>
+     * Displays the main menu and gets the user choice for signup or login.
+     * </p>
+     */
+    public void displayMainMenu() {
+        printMessage("1.Signup\n2.Login\n3.Exit");
+        final int userChoice = getChoice();
 
-        switch (UserChoice) {
+        switch (userChoice) {
             case 1:
                 signUp();
                 break;
             case 2:
                 login();
                 break;
+            case 3:
+                exit();
+                break;
             default:
-                System.out.println("Invalid UserChoice");
-                printMainMenu();
+                printMessage("Invalid UserChoice");
+                displayMainMenu();
         }
     }
 
+    /**
+     * <p>
+     * Handles the user signup process.
+     * </p>
+     */
     private void signUp() {
-        System.out.println("User Signup Or Enter * To Go Back");
-        String userName = getName();
-        String phoneNumber = getPhoneNumber();
-        String emailId = getEmailId();
-        String password = getPassword();
+        printMessage("User Signup Or Enter * To Go Back");
+        final User user = new User(getName(), getPhoneNumber(), getEmailId(), getPassword());
 
-        USER_CONTROLLER.setUserData(userName, phoneNumber, emailId, password);
-        if (USER_CONTROLLER.setUsersData(userName, phoneNumber, emailId, password)) {
-         login();
+        if (userController.createUser(user)) {
+            displayHomePageMenu(user);
+        } else {
+            printMessage("The User Already Exists");
+            displayMainMenu();
         }
-
     }
 
+    /**
+     * <p>
+     * Gets the username from the user after validating the name.
+     * </p>
+     *
+     * @return The valid username of the user
+     */
     private String getName() {
-        System.out.println("Enter Your Name");
-        final String name = SCANNER.nextLine().trim();
+        printMessage("Enter Your Name");
+        final String name = getInfo();
 
-        if (USER_DATA_VALIDATOR.validateBackOption(name)) {
-            printMainMenu();
+        if ("back".equals(name)) {
+            displayMainMenu();
         }
 
-        if (!USER_DATA_VALIDATOR.validatePhoneNumber(name)) {
-            System.out.println("Enter A Valid User Name");
+        if (!userDataValidator.validateUserName(name)) {
+            printMessage("Enter A Valid User Name");
             getName();
         }
 
         return name;
     }
 
+    /**
+     * <p>
+     * Gets the valid mobile number from the user after validation.
+     * </p>
+     *
+     * @return The mobile number of the user
+     */
     private String getPhoneNumber() {
-        System.out.println("Enter Your Phone Number");
-        final String phoneNumber = SCANNER.nextLine().trim();
+        printMessage("Enter Your Phone Number");
+        final String phoneNumber = getInfo();
 
-        if (USER_DATA_VALIDATOR.validateBackOption(phoneNumber)) {
-            printMainMenu();
+        if ("back".equals(phoneNumber)) {
+            displayMainMenu();
         }
 
-//        if (!USER_DATA_VALIDATOR.validatePhoneNumber(phoneNumber)) {
-//            System.out.println("Enter A Valid Phone Number");
-//            getPhoneNumber();
-//        }
-//
-//        if (USER_CONTROLLER.verifyExistingUser(phoneNumber)) {
-//            System.out.println("Phone Number Already Exists");
-//            getPhoneNumber();
-//        }
+        if (!userDataValidator.validatePhoneNumber(phoneNumber)) {
+            printMessage("Enter A Valid Phone Number");
+            getPhoneNumber();
+        }
 
-            return phoneNumber;
+        return phoneNumber;
     }
 
+    /**
+     * <p>
+     * Gets the valid email from the user after validation.
+     * </p>
+     *
+     * @return The valid email of the user
+     */
     private String getEmailId() {
-        System.out.println("Enter Your EmailId");
-        final String emailId = SCANNER.nextLine().trim();
+        printMessage("Enter Your EmailId");
+        final String emailId = getInfo();
 
-        if (USER_DATA_VALIDATOR.validateBackOption(emailId)) {
-            printMainMenu();
+        if ("back".equals(emailId)) {
+            displayMainMenu();
         }
 
-//        if (!USER_DATA_VALIDATOR.validateEmailId(emailId)) {
-//            System.out.println("Enter A Valid EmailId");
-//            getEmailId();
-//        }
+        if (!userDataValidator.validateEmailId(emailId)) {
+            printMessage("Enter A Valid EmailId");
+            getEmailId();
+        }
 
         return emailId;
     }
 
+    /**
+     * <p>
+     * Gets the password from the user after validating the password.
+     * </p>
+     *
+     * @return The validated password of the user
+     */
     private String getPassword() {
-        System.out.println("Enter Your Password");
-        final String password = SCANNER.nextLine().trim();
+        printMessage("Enter Your Password");
+        final String password = getInfo();
 
-        if (USER_DATA_VALIDATOR.validateBackOption(password)) {
-            printMainMenu();
+        if ("back".equals(password)) {
+            displayMainMenu();
         }
 
-//        if (!USER_DATA_VALIDATOR.validatePassword(password)) {
-//            System.out.println("Enter A Valid Password");
-//            getPassword();
-//        }
+        if (!userDataValidator.validatePassword(password)) {
+            printMessage("Enter A Valid Password");
+            getPassword();
+        }
 
         return password;
     }
 
-     public void login() {
-        System.out.println("User Login Or To Go Back Enter *:\nEnter The PhoneNumber");
-        final String phoneNumber = SCANNER.nextLine().trim();
+    /**
+     * <p>
+     * Gets the user details for login process.
+     * </p>
+     */
+     private void login() {
+        final String phoneNumber = getPhoneNumber();
 
-         if (USER_DATA_VALIDATOR.validateBackOption(phoneNumber)) {
-             printMainMenu();
+         if (userController.isUserExist(phoneNumber)) {
+             final User currentUser = userController.getUser(phoneNumber, getPassword());
+
+             if (null == currentUser) {
+                 printMessage("Incorrect Password");
+                 login();
+             }
+             displayHomePageMenu(currentUser);
+         } else {
+             printMessage("The Entered Phone Number Is Not Registered!");
+             login();
          }
-        System.out.println("Enter The Password");
-        final String password = SCANNER.nextLine().trim();
-
-         if (USER_DATA_VALIDATOR.validateBackOption(password)) {
-             printMainMenu();
-         }
-        USER_CONTROLLER.verifyUserLogin(phoneNumber, password);
-    }
-    
-    public void handlePhoneNumberNotFound() {
-        System.out.println("The Entered Phone Number Is Not Registered!");
-        login();
     }
 
-    public void handlePasswordMismatch() {
-        System.out.println("Password Doesn't Match Try Again");
-        login();
-    }
+    /**
+     * <p>
+     * Displays restaurants or allows the user to update their profile based on the users input.
+     * </p>
+     *
+     * @param user Represents the current {@link User}
+     */
+    public void displayHomePageMenu(final User user) {
+        printMessage("To Go Back Enter *\n1.Display Restaurants\n2.Edit User Profile\n3.Logout");
+        final int userChoice = getChoice();
 
-    public void displayUserOptions(final User currentUser) {
-        System.out.println("To Go Back Enter *\n1.Display Restaurants\n2.Edit User Profile\n3.Logout");
-        final String userChoice = SCANNER.nextLine().trim();
-
-        if (USER_DATA_VALIDATOR.validateBackOption(userChoice)) {
-            printMainMenu();
+        if (-1 == userChoice) {
+            displayMainMenu();
         }
 
-        switch (Integer.parseInt(userChoice)) {
+        switch (userChoice) {
             case 1:
-                RESTAURANT_VIEW.displayRestaurants(currentUser);
+                RestaurantView.getInstance().displayRestaurants(user);
                 break;
             case 2:
-                editUserProfile(currentUser);
+                updateUser(user);
                 break;
             case 3:
-                printMainMenu();
+                displayMainMenu();
                 break;
             default:
-                System.out.println("Enter A Valid Option");
-                displayUserOptions(currentUser);
+                printMessage("Enter A Valid Option");
+                displayHomePageMenu(user);
         }
     }
 
-    private void editUserProfile(final User currentUser) {
-        System.out.println("To Go Back Enter *\n1.To Edit The EmailId\n2.To Edit The Phone Number");
-        final String editProfileChoice = SCANNER.nextLine().trim();
+    /**
+     * <p>
+     * Updates the users information based on the chosen option.
+     * </p>
+     *
+     * @param user Represents the current {@link User}
+     */
+    private void updateUser(final User user) {
+        printMessage("To Go Back Enter *\n1.Update EmailId\n2.Update Phone Number\n3.Update Password\n4.Update User Name");
+        final int choice = getChoice();
 
-        if (USER_DATA_VALIDATOR.validateBackOption(editProfileChoice)) {
-            displayUserOptions(currentUser);
+        if (-1 == choice) {
+            displayHomePageMenu(user);
         }
 
-        switch (Integer.parseInt(editProfileChoice)) {
+        switch (choice) {
             case 1:
-                editEmailId(currentUser);
+                userController.updateEmailId(user, getEmailId());
                 break;
             case 2:
-                editPhoneNumber(currentUser);
+                userController.updatePhoneNumber(user, getPhoneNumber());
+                break;
+            case 3:
+                userController.updatePassword(user, getPassword());
+                break;
+            case 4:
+                userController.updateUserName(user, getName());
                 break;
             default:
-                System.out.println("Enter A Valid Option");
-                editUserProfile(currentUser);
+                printMessage("Enter A Valid Option");
+                updateUser(user);
         }
+        updateUser(user);
     }
 
-    private void editPhoneNumber(final User currentUser) {
-        System.out.println("Enter Your PhoneNumber");
-        final String phoneNumber = SCANNER.nextLine().trim();
-
-        if (USER_DATA_VALIDATOR.validateBackOption(phoneNumber)) {
-            editUserProfile(currentUser);
-        }
-
-        if (USER_DATA_VALIDATOR.validatePhoneNumber(phoneNumber)) {
-            USER_CONTROLLER.editUserPhoneNumber(currentUser, phoneNumber);
-        } else {
-            System.out.println("Enter A Valid Phone Number");
-            editPhoneNumber(currentUser);
-        }
-    }
-
-    private void editEmailId(final User currentUser) {
-        System.out.println("Enter Your EmailId");
-        final String emailId = SCANNER.nextLine().trim();
-
-        if (USER_DATA_VALIDATOR.validateBackOption(emailId)) {
-            editUserProfile(currentUser);
-        }
-
-        if (USER_DATA_VALIDATOR.validateEmailId(emailId)) {
-                USER_CONTROLLER.editUserEmailId(currentUser, emailId);
-        } else {
-            System.out.println("Enter A Valid EmailId");
-            editEmailId(currentUser);
-        }
+    /**
+     * <p>
+     * Exits from the application.
+     * </p>
+     */
+    private void exit() {
+        System.exit(0);
     }
 }
