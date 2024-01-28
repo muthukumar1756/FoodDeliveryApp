@@ -1,5 +1,7 @@
 package com.swiggy.view;
 
+import org.apache.log4j.Logger;
+
 import java.util.List;
 import java.util.Map;
 
@@ -21,9 +23,11 @@ public class RestaurantView extends CommonView {
 
     private static RestaurantView restaurantView;
 
+    private final Logger logger;
     private final RestaurantController restaurantController;
 
     private RestaurantView() {
+        logger = Logger.getLogger(RestaurantView.class);
         restaurantController = RestaurantController.getInstance();
     }
 
@@ -49,10 +53,10 @@ public class RestaurantView extends CommonView {
      * @param user Represents the current {@link User}
      */
     public void displayRestaurants(final User user) {
-        printMessage("To Go Back Enter *\nAvailable Restaurants In Your Area:");
+        logger.info("To Go Back Enter *\nAvailable Restaurants In Your Area:");
 
         for (final Map.Entry<Integer, Restaurant> restaurants : restaurantController.getRestaurants().entrySet()) {
-            System.out.println(String.format("%d %s", restaurants.getKey(), restaurants.getValue().getName()));
+            logger.info(String.format("%d %s", restaurants.getKey(), restaurants.getValue().getName()));
         }
         selectRestaurant(user);
     }
@@ -73,10 +77,12 @@ public class RestaurantView extends CommonView {
         final Restaurant selectedRestaurant = restaurantController.getRestaurants().get(restaurantNumber);
 
         if (null == selectedRestaurant) {
-            printMessage("Select A Valid Restaurant Id");
+            logger.warn("Select A Valid Restaurant Id");
             displayRestaurants(user);
         }
-        displayMenuCard(selectedRestaurant, user);
+        final List<Food> selectedMenuCard = restaurantController.getMenuCard(selectedRestaurant);
+
+        displayMenuCard(selectedRestaurant, selectedMenuCard, user);
     }
 
     /**
@@ -85,24 +91,21 @@ public class RestaurantView extends CommonView {
      * </p>
      *
      * @param restaurant Represents the {@link Restaurant} selected by the user
+     * @param selectedMenuCard Represents the menucard of the selected restaurant
      * @param user Represents the current {@link User}
      */
-    private void displayMenuCard(final Restaurant restaurant, final User user) {
-        List<Food> selectedRestaurantMenuCard = restaurantController.getMenuCard(restaurant);
+    private void displayMenuCard(final Restaurant restaurant,final List<Food> selectedMenuCard, final User user) {
+        if (null != selectedMenuCard) {
+            logger.info("\nAvailable Items:\n");
+            logger.info("ID | Name | Rate | Category ");
 
-        if (null != selectedRestaurantMenuCard) {
-            printMessage("\nAvailable Items:\n");
-
-            for (final Food food : selectedRestaurantMenuCard) {
-                System.out.println(String.format("%d %s %.2f %s",
-                        selectedRestaurantMenuCard.indexOf(food) + 1,
-                        food.getFoodName(),
-                        food.getRate(),
-                        food.getType()));
+            for (final Food food : selectedMenuCard) {
+                logger.info(String.format("%d %s %.2f %s", selectedMenuCard.indexOf(food) + 1,
+                        food.getFoodName(), food.getRate(), food.getType()));
             }
-            selectFilter(restaurant, user, selectedRestaurantMenuCard);
+            selectFilter(restaurant, user, selectedMenuCard);
         } else {
-            printMessage("Enter Valid Option");
+            logger.warn("The Chosen Restaurant Currently Doesn't Have Any Available Items");
             displayRestaurants(user);
         }
     }
@@ -117,7 +120,7 @@ public class RestaurantView extends CommonView {
      * @param menuCard Represents the menucard from the selected restaurant
      */
     private void selectFilter(final Restaurant restaurant, final User user, final List<Food> menuCard) {
-        printMessage("\n1.To Apply Filter\n2.To Continue Food Ordering\n3.To Select Other Restaurant");
+        logger.info("\n1.To Apply Filter\n2.To Continue Food Ordering\n3.To Select Other Restaurant");
         final int userChoice = getChoice();
 
         if (-1 == userChoice) {
@@ -135,8 +138,8 @@ public class RestaurantView extends CommonView {
                 displayRestaurants(user);
                 break;
             default:
-                printMessage("Invalid Option Try Again\n");
-                displayMenuCard(restaurant, user);
+                logger.warn("Invalid Option Try Again\n");
+                displayMenuCard(restaurant, menuCard, user);
         }
     }
 
@@ -150,24 +153,41 @@ public class RestaurantView extends CommonView {
      * @param menuCard Represents the menucard from the selected restaurant
      */
     private void selectFood(final Restaurant restaurant, final User user, final List<Food> menuCard) {
-            printMessage("Enter FoodId to order");
-            final int selectedIndex = getChoice();
+        logger.info("Enter FoodId To Add To Cart");
+        final int selectedIndex = getChoice();
 
-            if (-1 == selectedIndex) {
-                displayRestaurants(user);
-            }
-           int foodNumber = selectedIndex - 1;
+        if (-1 == selectedIndex) {
+            displayRestaurants(user);
+        }
+        final int foodNumber = selectedIndex - 1;
 
-            if (foodNumber > 0 && foodNumber <= menuCard.size()) {
-                final Food selectedFood = menuCard.get(foodNumber);
+        if (foodNumber >= 0 && foodNumber <= menuCard.size()) {
+            final Food selectedFood = menuCard.get(foodNumber);
+            final int quantity = getQuantity(user, selectedFood);
 
-                getQuantity(selectedFood, user, restaurant);
-            } else {
-                printMessage("Enter A Valid Option From The Menucard");
-                displayMenuCard(restaurant, user);
-            }
-
+            addFoodToCart(user, restaurant, selectedFood, quantity);
+        } else {
+            logger.warn("Enter A Valid Option From The Menucard");
+            displayMenuCard(restaurant, menuCard, user);
+        }
         addFoodOrPlaceOrder(restaurant, user);
+    }
+
+    /**
+     * <p>
+     * Adds the selected food to the user cart.
+     * </p>
+     *
+     * @param user Represents the current {@link User}
+     * @param restaurant Represents the {@link Restaurant} selected by the user
+     * @param food Represents the {@link Food} selected by user
+     * @param quantity Represents the quantity of selected food by the user
+     */
+    private void addFoodToCart(final User user, final Restaurant restaurant, final Food food,
+                              final int quantity) {
+        if (!CartController.getInstance().addFoodToCart(food, user, quantity,restaurant.getRestaurantId())) {
+            handleFoodsFromVariousRestaurants(user, restaurant, food, quantity);
+        }
     }
 
     /**
@@ -175,21 +195,48 @@ public class RestaurantView extends CommonView {
      * Gets the quantity of selected food by the user.
      * </p>
      *
-     * @param food Represents the {@link Food} chosen by the user
      * @param user Represents the current {@link User}
-     * @param restaurant Represents the {@link Restaurant} selected by the user
      */
-    private void getQuantity(final Food food, final User user, final Restaurant restaurant) {
-        printMessage("Enter The Quantity");
+    private int getQuantity(final User user, final Food food) {
+        logger.info("Enter The Quantity");
         final int quantity = getChoice();
 
         if (-1 == quantity) {
             displayRestaurants(user);
         }
+        final int foodQuantity = restaurantController.getQuantity(food, quantity);
+        final int availableQuantity = foodQuantity - quantity;
 
-        if (!CartController.getInstance().addFoodToCart(food, user, quantity, restaurant.getRestaurantId())) {
-            printMessage("The Entered Quantity Is Not Available");
-            getQuantity(food, user, restaurant);
+        if (0 > availableQuantity) {
+            logger.info("The Entered Quantity Is Not Available");
+            getQuantity(user,food);
+        }
+
+        return quantity;
+    }
+
+    /**
+     * <p>
+     * Handles the condition of user cart having foods from single restaurant.
+     * </p>
+     *
+     * @param user Represents the current {@link User}
+     * @param restaurant Represents the {@link Restaurant} selected by the user
+     * @param food Represents the {@link Food} selected by user
+     * @param quantity Represents the quantity of selected food by the user
+     */
+    private void handleFoodsFromVariousRestaurants(final User user, final Restaurant restaurant, final Food food,
+                                                  final int quantity) {
+        logger.warn("""
+                    Your Cart Contains Items From Other Restaurant!.
+                    Would You Like To Reset Your Cart For Adding Items From This Restaurant ?
+                    1 To Reset
+                    2 To Cancel""");
+        final int userChoice = getChoice();
+
+        if (1 == (userChoice)) {
+            CartController.getInstance().clearCart(user);
+            addFoodToCart(user, restaurant, food, quantity);
         }
     }
 
@@ -203,7 +250,7 @@ public class RestaurantView extends CommonView {
      * @param menuCard Represents the menucard from the selected restaurant
      */
     private void selectFoodFilter(final Restaurant restaurant, final User user, final List<Food> menuCard) {
-        printMessage("\nFilter Type\n1.Veg\n2.Non-Veg");
+        logger.info("\nFilter Type\n1.Veg\n2.Non-Veg");
         final int filterTypeOption = getChoice();
 
         if (-1 == filterTypeOption) {
@@ -218,7 +265,7 @@ public class RestaurantView extends CommonView {
                 selectNonVegFood(restaurant, user);
                 break;
             default:
-                printMessage("Enter valid option");
+                logger.warn("Enter valid option");
                 selectFoodFilter(restaurant, user, menuCard);
         }
     }
@@ -232,17 +279,14 @@ public class RestaurantView extends CommonView {
      * @param user Represents the current {@link User}
      */
     private void selectVegFood(final Restaurant restaurant, final User user) {
-        final List<Food> selectedRestaurantMenuCard = restaurant.getVegMenuCard();
+        final List<Food> selectedMenuCard = restaurant.getVegMenuCard();
 
-        printMessage("Available Items:");
-        for (final Food food : selectedRestaurantMenuCard) {
-            System.out.println(String.format("%d %s %.2f %s",
-                    selectedRestaurantMenuCard.indexOf(food) + 1,
-                    food.getFoodName(),
-                    food.getRate(),
-                    food.getType()));
+        logger.info("Available Items:");
+        for (final Food food : selectedMenuCard) {
+            logger.info(String.format("%d %s %.2f %s", selectedMenuCard.indexOf(food) + 1,
+                    food.getFoodName(), food.getRate(), food.getType()));
         }
-        selectFood(restaurant, user, selectedRestaurantMenuCard);
+        selectFood(restaurant, user, selectedMenuCard);
     }
 
     /**
@@ -256,14 +300,11 @@ public class RestaurantView extends CommonView {
     private void selectNonVegFood(final Restaurant restaurant, final User user) {
         final List<Food> selectedRestaurantMenuCard = restaurant.getNonVegMenuCard();
 
-        printMessage("\nAvailable Items:");
+        logger.info("\nAvailable Items:");
 
         for (final Food food : selectedRestaurantMenuCard) {
-            System.out.println(String.format("%d %s %.2f %s",
-                    selectedRestaurantMenuCard.indexOf(food) + 1,
-                    food.getFoodName(),
-                    food.getRate(),
-                    food.getType()));
+            logger.info(String.format("%d %s %.2f %s", selectedRestaurantMenuCard.indexOf(food) + 1,
+                    food.getFoodName(), food.getRate(), food.getType()));
         }
         selectFood(restaurant, user, selectedRestaurantMenuCard);
     }
@@ -277,22 +318,22 @@ public class RestaurantView extends CommonView {
      * @param user Represents the current {@link User}
      */
     public void addFoodOrPlaceOrder(final Restaurant restaurant, final User user) {
-        printMessage("Do You Want To Add More Food\n1.Add More Food \n2.Place Order");
+        logger.info("Do You Want To Add More Food\n1.Add More Food \n2.Place Order");
         final int userChoice = getChoice();
 
         if (-1 == userChoice) {
-            displayMenuCard(restaurant, user);
+            displayMenuCard(restaurant, restaurant.getMenuCard(), user);
         }
 
         switch (userChoice) {
             case 1:
-                displayMenuCard(restaurant, user);
+                displayMenuCard(restaurant, restaurant.getMenuCard(), user);
                 break;
             case 2:
-                CartView.getInstance().printCart(restaurant, user);
+                CartView.getInstance().displayCart(restaurant, user);
                 break;
             default:
-                printMessage("Enter A Valid Option");
+                logger.warn("Enter A Valid Option");
                 addFoodOrPlaceOrder(restaurant, user);
         }
     }

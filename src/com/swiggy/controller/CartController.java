@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * <p>
- * Handles the users cart related operation and responsible for receiving user input and processing it
+ * Handles the users cart related operation and responsible for receiving user input and processing it.
  * </p>
  *
  * @author Muthu kumar V

@@ -2,6 +2,7 @@ package com.swiggy.service.impl;
 
 import com.swiggy.model.User;
 import com.swiggy.service.UserService;
+import com.swiggy.view.UserDataUpdateType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,27 +47,16 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean createUser(final User user) {
-        if (! users.containsKey(user.getPhoneNumber())) {
-                if(! users.containsKey((user.getEmailId()))) {
-                    users.put(user.getPhoneNumber(), user);
-                    return true;
-                } else {
-                    return false;
-                }
-        } else {
-            return false;
-        }
-    }
+        if (!users.containsKey(user.getPhoneNumber())) {
 
-    /**
-     * {@inheritDoc}
-     *
-     * @param phoneNumber Represents the phone_number of the current user
-     * @return True if the user is exist, false otherwise
-     */
-    @Override
-    public boolean isUserExist(final String phoneNumber) {
-        return users.containsKey(phoneNumber);
+            if(!users.containsKey((user.getEmailId()))) {
+                users.put(user.getPhoneNumber(), user);
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -92,43 +82,22 @@ public class UserServiceImpl implements UserService {
      * {@inheritDoc}
      *
      * @param user Represents the current {@link User}
-     * @param name Represents the name of the current user
+     * @param type Represents the user data to be updated
      */
-    @Override
-    public void updateUserName(final User user, final String name) {
-        user.setName(name);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param user Represents the current {@link User}
-     * @param password Represents the password of the current user
-     */
-    @Override
-    public void updateUserPassword(final User user, final String password) {
-        user.setPassword(password);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param user Represents the current {@link User}
-     * @param phoneNumber Represents the phone_number of the current user
-     */
-    @Override
-    public void updateUserPhoneNumber(final User user, final String phoneNumber) {
-        user.setPhoneNumber(phoneNumber);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param user Represents the current {@link User}
-     * @param emailId Represents the email_id of the current user
-     */
-    @Override
-    public void updateUserEmailId(final User user, final String emailId) {
-        user.setEmailId(emailId);
+    public void updateUser(final User user, final String userData, final UserDataUpdateType type){
+        switch (type) {
+            case NAME:
+                user.setName(userData);
+                break;
+            case PHONENUMBER:
+                user.setPhoneNumber(userData);
+                break;
+            case EMAILID:
+                user.setEmailId(userData);
+                break;
+            case PASSWORD:
+                user.setPassword(userData);
+                break;
+        }
     }
 }

@@ -31,17 +31,16 @@ public class Restaurant {
         this.id = id;
     }
 
-    public void createVegMenucard(final Food food) {
+    public void createVegMenuCard(final Food food) {
         vegMenuCard.add(food);
     }
 
-    public void createNonVegMenucard(final Food food) {
+    public void createNonVegMenuCard(final Food food) {
         nonVegMenuCard.add(food);
     }
 
-    public void createMenuCard() {
-        menuCard.addAll(vegMenuCard);
-        menuCard.addAll(nonVegMenuCard);
+    public void createMenuCard(final Food food) {
+        menuCard.add(food);
     }
 
     public String getName() {

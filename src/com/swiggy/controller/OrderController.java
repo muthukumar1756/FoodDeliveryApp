@@ -1,12 +1,15 @@
 package com.swiggy.controller;
 
+import com.swiggy.model.Food;
 import com.swiggy.model.User;
 import com.swiggy.service.OrderService;
 import com.swiggy.service.impl2.OrderServiceImpl;
 
+import java.util.Map;
+
 /**
  * <p>
- * Handles the order related operation and responsible for receiving user input and processing it
+ * Handles the order related operation and responsible for receiving user input and processing it.
  * </p>
  *
  * @author Muthu kumar V
@@ -44,7 +47,7 @@ public class OrderController {
      * @param user Represents the current {@link User}
      * @return True if the order is placed, false otherwise
      */
-    public boolean placeOrder(final User user) {
-        return orderService.placeOrder(user);
+    public boolean placeOrder(final User user, final Map<Food, Integer> cart) {
+        return orderService.placeOrder(user, cart);
     }
 }

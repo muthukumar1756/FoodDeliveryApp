@@ -1,7 +1,7 @@
 package com.swiggy.service.impl2;
 
-import com.swiggy.dao.CartDAO;
-import com.swiggy.dao.impl.CartDAOImpl;
+import com.swiggy.datahandler.CartDataHandler;
+import com.swiggy.datahandler.impl.CartDataHandlerImpl;
 import com.swiggy.model.Food;
 import com.swiggy.model.Restaurant;
 import com.swiggy.model.User;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * <p>
- *
+ * Implements the service of the user cart related operation.
  * </p>
  *
  * @author Muthu kumar V
@@ -21,10 +21,10 @@ public class CartServiceImpl implements CartService{
 
     private static CartService cartService;
 
-    private final CartDAO cartDAO;
+    private final CartDataHandler cartDataHandler;
 
     private CartServiceImpl() {
-        cartDAO = CartDAOImpl.getInstance();
+        cartDataHandler = CartDataHandlerImpl.getInstance();
     }
 
     /**
@@ -53,7 +53,7 @@ public class CartServiceImpl implements CartService{
      */
     @Override
     public boolean addFoodToCart(final Food food, final User user, final int quantity, final int restaurantId) {
-      return cartDAO.addFoodToCart(food, user, quantity, restaurantId);
+      return cartDataHandler.addFoodToCart(food, user, quantity, restaurantId);
     }
 
     /**
@@ -64,7 +64,7 @@ public class CartServiceImpl implements CartService{
      */
     @Override
     public Map<Food, Integer> getCart(final User user) {
-        return cartDAO.getCart(user);
+        return cartDataHandler.getCart(user);
     }
 
     /**
@@ -76,7 +76,7 @@ public class CartServiceImpl implements CartService{
      */
     @Override
     public boolean removeFood(final User user, final Food food) {
-        return cartDAO.removeFood(user, food);
+        return cartDataHandler.removeFood(user, food);
     }
 
     /**
@@ -87,6 +87,6 @@ public class CartServiceImpl implements CartService{
      */
     @Override
     public boolean clearCart(final User user) {
-        return cartDAO.clearCart(user);
+        return cartDataHandler.clearCart(user);
     }
 }

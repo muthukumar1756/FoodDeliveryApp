@@ -1,6 +1,9 @@
 package com.swiggy.service;
 
+import com.swiggy.model.Food;
 import com.swiggy.model.User;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -20,5 +23,5 @@ public interface OrderService {
      * @param user Represents the current {@link User}
      * @return True if the order is placed, false otherwise
      */
-    boolean placeOrder(final User user);
+    boolean placeOrder(final User user, final Map<Food, Integer> cart);
 }

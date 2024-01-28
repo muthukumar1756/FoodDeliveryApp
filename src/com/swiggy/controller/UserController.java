@@ -3,6 +3,7 @@ package com.swiggy.controller;
 import com.swiggy.model.User;
 import com.swiggy.service.UserService;
 import com.swiggy.service.impl2.UserServiceImpl;
+import com.swiggy.view.UserDataUpdateType;
 
 /**
  * <p>
@@ -64,65 +65,14 @@ public class UserController {
 
     /**
      * <p>
-     * Checks for the user is already exist or not.
-     * </p>
-     *
-     * @param phoneNumber Represents the phone_number of the current user
-     * @return True if the user is exist, false otherwise
-     */
-    public boolean isUserExist(final String phoneNumber) {
-        return userService.isUserExist(phoneNumber);
-    }
-
-    /**
-     * <p>
-     * Updates the user_name of the current user.
+     * Updates the data of the current user.
      * </p>
      *
      * @param user Represents the current {@link User}
-     * @param name Represents the name of the current user
+     * @param userData Represents the data of the current user to be updated
+     * @param type Represents the type of data of the current user to be updated
      */
-    public void updateUserName(final User user, final String name) {
-        userService.updateUserName(user, name);
-    }
-
-    /**
-     * <p>
-     * Updates the email_id of the current user.
-     * </p>
-     *
-     * @param user Represents the current {@link User}
-     * @param phoneNumber Represents the phone_number of the current user
-     */
-    public void updatePhoneNumber(final User user, final String phoneNumber) {
-        userService.updateUserPhoneNumber(user, phoneNumber);
-    }
-
-    /**
-     * <p>
-     * Updates the password of the current user.
-     * </p>
-     *
-     * @param user Represents the current {@link User}
-     * @param emailId Represents the email_id of the current user
-     */
-    public void updateEmailId(final User user, final String emailId) {
-        userService.updateUserEmailId(user, emailId);
-    }
-
-    /**
-     * <p>
-     * Updates the phone_number of the current user.
-     * </p>
-     *
-     * @param user Represents the current {@link User}
-     * @param password Represents the password of the current user
-     */
-    public void updatePassword(final User user, final String password) {
-        userService.updateUserPassword(user, password);
-    }
-
-    public void userExit() {
-
+    public void updateUser(final User user, final String userData, final UserDataUpdateType type) {
+        userService.updateUser(user, userData, type);
     }
 }

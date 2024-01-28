@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * <p>
- *
+ * Implements the service of the user cart related operation.
  * </p>
  *
  * @author Muthu kumar V
@@ -79,7 +79,11 @@ public class CartServiceImpl implements CartService {
      * @return True if the food is removed,false otherwise
      */
     @Override
-    public boolean removeFood(User user, Food food) {
+    public boolean removeFood(final User user, final Food food) {
+        final Map<Food, Integer> cart = user.getCartItems();
+
+        cart.remove(food);
+
         return true;
     }
 
@@ -90,7 +94,10 @@ public class CartServiceImpl implements CartService {
      * @return The true if the cart is cleared, false otherwise
      */
     @Override
-    public boolean clearCart(User user) {
+    public boolean clearCart(final User user) {
+        final Map<Food, Integer> cart = user.getCartItems();
+
+        cart.clear();
         return true;
     }
 }

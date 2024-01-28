@@ -1,7 +1,7 @@
 package com.swiggy.service.impl2;
 
-import com.swiggy.dao.RestaurantDAO;
-import com.swiggy.dao.impl.RestaurantDAOImpl;
+import com.swiggy.datahandler.RestaurantDataHandler;
+import com.swiggy.datahandler.impl.RestaurantDataHandlerImpl;
 import com.swiggy.model.Food;
 import com.swiggy.model.Restaurant;
 import com.swiggy.service.RestaurantService;
@@ -21,10 +21,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     private static RestaurantService restaurantService;
 
-    private final RestaurantDAO restaurantDAO;
+    private final RestaurantDataHandler restaurantDataHandler;
 
     private RestaurantServiceImpl() {
-        restaurantDAO = RestaurantDAOImpl.getInstance();
+        restaurantDataHandler = RestaurantDataHandlerImpl.getInstance();
     }
 
     /**
@@ -35,7 +35,7 @@ public class RestaurantServiceImpl implements RestaurantService {
      * @return The restaurant service implementation object
      */
     public static RestaurantService getInstance() {
-        if (restaurantService ==  null) {
+        if (null == restaurantService) {
             restaurantService = new RestaurantServiceImpl();
         }
 
@@ -45,43 +45,42 @@ public class RestaurantServiceImpl implements RestaurantService {
     /**
      * {@inheritDoc}
      *
-     * @return The map having all the restaurants.
-     */
-    @Override
-    public Map<Integer, Restaurant> getRestaurants() {
-        return restaurantDAO.getRestaurants();
-    }
-
-    /**
-     * {@inheritDoc}
-     *
      * @param restaurants Represents all the {@link Restaurant}
      */
     @Override
-    public boolean createRestaurants(Map<Integer, Restaurant> restaurants) {
-        return restaurantDAO.createRestaurants(restaurants);
+    public boolean loadRestaurants(final Map<Integer, Restaurant> restaurants) {
+        return restaurantDataHandler.loadRestaurants(restaurants);
     }
 
     /**
      * {@inheritDoc}
      *
-     * @param food Represents the current {@link Food}
-     * @param restaurant Represents the current {@link Restaurant}
+     * @param menuCard Contains the list of foods in the restaurant
      */
-    @Override
-    public void createVegFood(final Food food, final Restaurant restaurant) {
-        restaurantDAO.createFood(food, restaurant);
+    public void loadMenuCard(final Map<Food, Restaurant> menuCard) {
+        restaurantDataHandler.loadMenuCard(menuCard);
     }
 
     /**
      * {@inheritDoc}
      *
-     * @param food Represents the current {@link Food}
-     * @param restaurant Represents the current {@link Restaurant}
+     * @return The map having all the restaurants
      */
     @Override
-    public void createNonVegFood(final Food food, final Restaurant restaurant) {
-        restaurantDAO.createFood(food, restaurant);
+    public Map<Integer, Restaurant> getRestaurants() {
+        return restaurantDataHandler.getRestaurants();
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param food Represents the current {@link Food} selected by the user
+     * @param quantity Represents the quantity of the food given by the current user
+     * @return Available quantity from the selected restaurant
+     */
+    @Override
+    public int getQuantity(final Food food, final int quantity) {
+        return restaurantDataHandler.getQuantity(food, quantity);
     }
 
     /**
@@ -91,7 +90,7 @@ public class RestaurantServiceImpl implements RestaurantService {
      * @return The menucard list
      */
     @Override
-    public List<Food> getMenuCard(Restaurant restaurant) {
-        return restaurantDAO.getMenuCard(restaurant);
+    public List<Food> getMenuCard(final Restaurant restaurant) {
+        return restaurantDataHandler.getMenuCard(restaurant);
     }
 }

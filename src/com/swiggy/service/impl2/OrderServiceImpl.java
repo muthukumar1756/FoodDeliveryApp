@@ -1,13 +1,16 @@
 package com.swiggy.service.impl2;
 
-import com.swiggy.dao.OrderDAO;
-import com.swiggy.dao.impl.OrderDAOImpl;
+import com.swiggy.datahandler.OrderDataHandler;
+import com.swiggy.datahandler.impl.OrderDataHandlerImpl;
+import com.swiggy.model.Food;
 import com.swiggy.model.User;
 import com.swiggy.service.OrderService;
 
+import java.util.Map;
+
 /**
  * <p>
- *
+ * Implements the service of the user order related operation.
  * </p>
  *
  * @author Muthu kumar V
@@ -17,10 +20,10 @@ public class OrderServiceImpl implements OrderService {
 
     private static OrderService orderService;
 
-    private final OrderDAO orderDAO;
+    private final OrderDataHandler orderDataHandler;
 
     private OrderServiceImpl() {
-        orderDAO = OrderDAOImpl.getInstance();
+        orderDataHandler = OrderDataHandlerImpl.getInstance();
     }
 
     /**
@@ -45,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
      * @return True if the order is placed, false otherwise
      */
     @Override
-    public boolean placeOrder(final User user) {
-        return orderDAO.placeOrder(user);
+    public boolean placeOrder(final User user, final Map<Food, Integer> cart) {
+        return orderDataHandler.placeOrder(user, cart);
     }
 }

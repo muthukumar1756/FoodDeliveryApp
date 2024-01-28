@@ -10,6 +10,24 @@ public interface RestaurantService {
 
     /**
      * <p>
+     * Creates all the restaurants.
+     * </p>
+     *
+     * @param restaurants Represents all the {@link Restaurant}
+     */
+    boolean loadRestaurants(final Map<Integer, Restaurant> restaurants);
+
+    /**
+     * <p>
+     * Creates the menucard for the restaurant.
+     * </p>
+     *
+     * @param menuCard Contains the list of foods in the restaurant
+     */
+    void loadMenuCard(final Map<Food, Restaurant> menuCard);
+
+    /**
+     * <p>
      * Gets all the restaurants
      * </p>
      *
@@ -19,32 +37,14 @@ public interface RestaurantService {
 
     /**
      * <p>
-     * Creates all the restaurants.
+     * Gets the available food quantity in the restaurant .
      * </p>
      *
-     * @param restaurants Represents all the {@link Restaurant}
+     * @param food Represents the current {@link Food} selected by the user
+     * @param quantity Represents the quantity of the food given by the current user
+     * @return Available quantity from the selected restaurant
      */
-    boolean createRestaurants(final Map<Integer, Restaurant> restaurants);
-
-    /**
-     * <p>
-     * Creates all the veg foods.
-     * </p>
-     *
-     * @param food Represents the current {@link Food}
-     * @param restaurant Represents the current {@link Restaurant}
-     */
-    void createVegFood(final Food food, final Restaurant restaurant);
-
-    /**
-     * <p>
-     * Creates all the nonveg foods.
-     * </p>
-     *
-     * @param food Represents the current {@link Food}
-     * @param restaurant Represents the current {@link Restaurant}
-     */
-    void createNonVegFood(final Food food, final Restaurant restaurant);
+    int getQuantity(final Food food, final int quantity);
 
     /**
      * <p>

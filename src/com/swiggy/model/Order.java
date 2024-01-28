@@ -10,9 +10,9 @@ package com.swiggy.model;
  */
 public class Order {
 
-    private  int id;
-    private  int userId;
-    private  String address;
+    private int id;
+    private int userId;
+    private String address;
     private float totalAmount;
 
     public Order() {
@@ -30,7 +30,7 @@ public class Order {
         this.address = address;
     }
 
-    public void setUserId(final int id) {
-        this.userId = id;
+    public void setUserId(final int userId) {
+        this.userId = userId;
     }
 }

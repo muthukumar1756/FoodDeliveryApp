@@ -1,12 +1,14 @@
 package com.swiggy.view;
 
+import org.apache.log4j.Logger;
+
+import java.util.Map;
+
 import com.swiggy.controller.OrderController;
 import com.swiggy.model.Food;
 import com.swiggy.model.Restaurant;
 import com.swiggy.model.User;
 import com.swiggy.model.Cart;
-
-import java.util.Map;
 
 /**
  * <p>
@@ -20,11 +22,13 @@ public class OrderView extends CommonView {
 
     private static OrderView orderView;
 
+    private final Logger logger;
     private final CartView cartView;
     private final RestaurantView restaurantView;
     private final OrderController orderController;
 
     private OrderView() {
+        logger = Logger.getLogger(OrderView.class);
         restaurantView = RestaurantView.getInstance();
         cartView = CartView.getInstance();
         orderController = OrderController.getInstance();
@@ -56,10 +60,10 @@ public class OrderView extends CommonView {
      */
     public void placeOrder(final Restaurant restaurant, final Map<Food, Integer> cart, final User user) {
         if (!cart.isEmpty()) {
-            final String userAddress = getDeliveryAddress(restaurant, cart, user);
+            final String userAddress = getDeliveryAddress(restaurant, user);
 
-            if (orderController.placeOrder(user)) {
-                System.out.println("\n Your Order Is Placed..\nWill Shortly Delivered To This Address : "+ userAddress);
+            if (orderController.placeOrder(user, cart)) {
+                logger.info(String.format("\nYour Order Is Placed..\nWill Shortly Delivered To This Address : %s", userAddress));
                 cartView.displayRestaurantOrLogout(user);
             }
         } else {
@@ -73,22 +77,21 @@ public class OrderView extends CommonView {
      * </p>
      *
      * @param restaurant Represents the {@link Restaurant} selected by the user
-     * @param cart Represents the {@link Cart} of the current user
      * @param user Represents the current {@link User}
      * @return The address of the current user
      */
-    private String getDeliveryAddress(final Restaurant restaurant, final Map<Food, Integer> cart, final User user) {
-        printMessage("Enter Your Address");
-        printMessage("Enter Your Door Number");
+    private String getDeliveryAddress(final Restaurant restaurant, final User user) {
+        logger.info("Enter Your Address");
+        logger.info("Enter Your Door Number");
         final String doorNum = getInfo();
 
-        printMessage("Enter Your Street Name");
+        logger.info("Enter Your Street Name");
         final String streetName = getInfo();
 
-        printMessage("Enter Your Area Name");
+        logger.info("Enter Your Area Name");
         final String areaName = getInfo();
 
-        printMessage("Enter Your City Name");
+        logger.info("Enter Your City Name");
         final String cityName = getInfo();
 
         final String userAddress = String.join(" ", doorNum, streetName, areaName, cityName);
@@ -96,7 +99,7 @@ public class OrderView extends CommonView {
 
         if ("back".equals(doorNum) || "back".equals(streetName) || "back".equals(areaName) ||
                 "back".equals(cityName)) {
-            cartView.printCart(restaurant, user);
+            cartView.displayCart(restaurant, user);
         }
 
         return userAddress;
@@ -112,7 +115,7 @@ public class OrderView extends CommonView {
      * @param user Represents the current {@link User}
      */
     private void handleEmptyCart(final Restaurant restaurant, final Map<Food, Integer> cart, final User user) {
-        printMessage("Your Order Is Empty\nPlease Select A option From Below:\n1.To Order Foods\n2.Logout");
+        logger.info("Your Order Is Empty\nPlease Select A option From Below:\n1.To Order Foods\n2.Logout");
         final int userChoice = getChoice();
 
         if (- 1 == userChoice) {
@@ -124,11 +127,11 @@ public class OrderView extends CommonView {
                 restaurantView.displayRestaurants(user);
                 break;
             case 2:
-                printMessage("Your Account Is Logged Out");
+                logger.info("Your Account Is Logged Out");
                 UserView.getInstance().displayMainMenu();
                 break;
             default:
-                printMessage("Enter A Valid Option");
+                logger.warn("Enter A Valid Option");
                 placeOrder(restaurant, cart, user);
         }
     }

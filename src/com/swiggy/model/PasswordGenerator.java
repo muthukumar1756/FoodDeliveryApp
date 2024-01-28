@@ -1,6 +1,6 @@
 package com.swiggy.model;
 
-import com.swiggy.customexception.HashAlgorithmNotFoundException;
+import com.swiggy.exception.HashAlgorithmNotFoundException;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -21,6 +21,13 @@ public class PasswordGenerator {
     private PasswordGenerator() {
     }
 
+    /**
+     * <p>
+     * Gets the password generator class object.
+     * </p>
+     *
+     * @return The password generator object
+     */
     public static PasswordGenerator getInstance() {
         if (null == passwordGenerator) {
             passwordGenerator = new PasswordGenerator();
@@ -29,14 +36,22 @@ public class PasswordGenerator {
         return passwordGenerator;
     }
 
+    /**
+     * <p>
+     * Hashes the user password.
+     * </p>
+     *
+     * @param password password of the current user
+     * @return The hashed password
+     */
     public String hashPassword(final String password) {
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            byte[] encodedHash = messageDigest.digest(password.getBytes(StandardCharsets.UTF_8));
+            final MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+            final byte[] encodedHash = messageDigest.digest(password.getBytes(StandardCharsets.UTF_8));
 
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : encodedHash) {
-                hexString.append(String.format("%02x", b));
+            final StringBuilder hexString = new StringBuilder();
+            for (final byte hashByte : encodedHash) {
+                hexString.append(String.format("%02x", hashByte));
             }
 
             return hexString.substring(0, 25);
@@ -45,5 +60,3 @@ public class PasswordGenerator {
         }
     }
 }
-
-

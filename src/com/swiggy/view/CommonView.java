@@ -1,6 +1,6 @@
 package com.swiggy.view;
 
-import com.swiggy.view.validation.UserDataValidator;
+import org.apache.log4j.Logger;
 
 import java.util.Scanner;
 
@@ -16,10 +16,9 @@ public class CommonView {
 
     private static Scanner scanner;
 
-    private final UserDataValidator userDataValidator;
+    private final Logger logger = Logger.getLogger(CommonView.class);
 
     CommonView() {
-        userDataValidator = UserDataValidator.getInstance();
     }
 
     /**
@@ -30,22 +29,11 @@ public class CommonView {
      * @return The scanner object
      */
     public static Scanner getScannerInstance() {
-        if (scanner == null) {
+        if (null == scanner) {
             scanner = new Scanner(System.in);
         }
 
         return scanner;
-    }
-
-    /**
-     * <p>
-     * Prints the display messages.
-     * </p>
-     *
-     * @param message Represents information of the process
-     */
-    public void printMessage(final String message) {
-        System.out.println(message);
     }
 
     /**
@@ -58,13 +46,13 @@ public class CommonView {
     public int getChoice(){
         final String choice = getScannerInstance().nextLine().trim();
 
-        if (userDataValidator.isBackButton(choice)) {
+        if (isBackButton(choice)) {
             return -1;
         } else {
             try {
                 return Integer.parseInt(choice);
             } catch (NumberFormatException message) {
-                System.out.println("Enter valid input");
+                logger.warn("Enter Valid Input");
 
                 return getChoice();
             }
@@ -81,10 +69,20 @@ public class CommonView {
     public String getInfo() {
         final String info = getScannerInstance().nextLine().trim();
 
-        if (userDataValidator.isBackButton(info)) {
+        if (isBackButton(info)) {
             return "back";
         } else {
             return info;
         }
+    }
+
+    /**
+     * Validates the user input for the back option.
+     *
+     * @param back The back choice of the user
+     * @return True if back condition is satisfied, false otherwise
+     */
+    public boolean isBackButton(final String back) {
+        return "*".equals(back);
     }
 }

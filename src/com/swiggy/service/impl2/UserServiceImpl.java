@@ -1,9 +1,10 @@
 package com.swiggy.service.impl2;
 
-import com.swiggy.dao.UserDAO;
-import com.swiggy.dao.impl.UserDAOImpl;
+import com.swiggy.datahandler.UserDataHandler;
+import com.swiggy.datahandler.impl.UserDataHandlerImpl;
 import com.swiggy.model.User;
 import com.swiggy.service.UserService;
+import com.swiggy.view.UserDataUpdateType;
 
 /**
  * <p>
@@ -15,12 +16,12 @@ import com.swiggy.service.UserService;
  */
 public class UserServiceImpl implements UserService {
 
-    private static UserServiceImpl userService;
+    private static UserService userService;
 
-    private final UserDAO userDAO;
+    private final UserDataHandler userDataHandler;
 
     private UserServiceImpl() {
-        userDAO = UserDAOImpl.getInstance();
+        userDataHandler = UserDataHandlerImpl.getInstance();
     }
 
     /**
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
      *
      * @return The user service implementation object
      */
-    public static UserServiceImpl getInstance() {
+    public static UserService getInstance() {
         if (null == userService) {
             userService = new UserServiceImpl();
         }
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean createUser(final User user) {
-       return userDAO.createUser(user);
+       return userDataHandler.createUser(user);
     }
 
     /**
@@ -58,61 +59,29 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User getUser(final String phoneNumber, final String password) {
-        return userDAO.getUser(phoneNumber, password);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param phoneNumber Represents the phone_number of the current user
-     * @return True if the user is exist, false otherwise
-     */
-    @Override
-    public boolean isUserExist(final String phoneNumber) {
-        return userDAO.isUserExist(phoneNumber);
+        return userDataHandler.getUser(phoneNumber, password);
     }
 
     /**
      * {@inheritDoc}
      *
      * @param user Represents the current {@link User}
-     * @param name Represents the name of the current user
+     * @param type Represents the user data to be updated
      */
-    @Override
-    public void updateUserName(final User user, final String name) {
-        userDAO.updateUserName(user, name);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param user Represents the current {@link User}
-     * @param phoneNumber Represents the phone_number of the current user
-     */
-    @Override
-    public void updateUserPhoneNumber(final User user, final String phoneNumber) {
-        userDAO.updateUserPhoneNumber(user, phoneNumber);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param user Represents the current {@link User}
-     * @param emailId Represents the email_id of the current user
-     */
-    @Override
-    public void updateUserEmailId(final User user, final String emailId) {
-        userDAO.updateUserEmailId(user, emailId);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param user Represents the current {@link User}
-     * @param phoneNumber Represents the phone_number of the current user
-     */
-    @Override
-    public void updateUserPassword(final User user, final String phoneNumber) {
-        userDAO.updateUserPassword(user, phoneNumber);
+    public void updateUser(final User user, final String userData, final UserDataUpdateType type){
+        switch (type) {
+            case NAME:
+                userDataHandler.updateUser(user, "name", userData);
+                break;
+            case PHONENUMBER:
+                userDataHandler.updateUser(user, "phone_number", userData);
+                break;
+            case EMAILID :
+                userDataHandler.updateUser(user, "email_id", userData);
+                break;
+            case PASSWORD:
+                userDataHandler.updateUser(user, "password", userData);
+                break;
+        }
     }
 }

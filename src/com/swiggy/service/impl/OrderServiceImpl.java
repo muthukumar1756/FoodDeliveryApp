@@ -1,12 +1,15 @@
 package com.swiggy.service.impl;
 
+import com.swiggy.model.Food;
 import com.swiggy.model.Order;
 import com.swiggy.model.User;
 import com.swiggy.service.OrderService;
 
+import java.util.Map;
+
 /**
  * <p>
- *
+ * Implements the service of the user order related operation.
  * </p>
  *
  * @author Muthu kumar V
@@ -41,7 +44,7 @@ public class OrderServiceImpl implements OrderService {
      * @return True if the order is placed, false otherwise
      */
     @Override
-    public boolean placeOrder(final User user) {
+    public boolean placeOrder(final User user, final Map<Food, Integer> cart) {
         final String address = user.getAddress();
         final Order order = new Order();
 

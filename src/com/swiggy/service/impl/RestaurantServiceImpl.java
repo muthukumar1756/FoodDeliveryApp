@@ -1,6 +1,7 @@
 package com.swiggy.service.impl;
 
 import com.swiggy.model.Food;
+import com.swiggy.model.FoodType;
 import com.swiggy.model.Restaurant;
 import com.swiggy.service.RestaurantService;
 
@@ -43,6 +44,38 @@ public class RestaurantServiceImpl implements RestaurantService {
     /**
      * {@inheritDoc}
      *
+     * @param restaurantMap Represents all the {@link Restaurant}
+     */
+    @Override
+    public boolean loadRestaurants(final Map<Integer, Restaurant> restaurantMap) {
+        restaurants.putAll(restaurantMap);
+
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param menuCard Contains the list of foods in the restaurant
+     */
+    public void loadMenuCard(final Map<Food, Restaurant> menuCard) {
+        for (final Map.Entry<Food, Restaurant> restaurantFood : menuCard.entrySet()) {
+            final Food food = restaurantFood.getKey();
+            final Restaurant restaurant = restaurantFood.getValue();
+
+            if (food.getType().equals(FoodType.NONVEG)) {
+                restaurant.createNonVegMenuCard(food);
+                restaurant.createMenuCard(food);
+            } else {
+                restaurant.createVegMenuCard(food);
+                restaurant.createMenuCard(food);
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     *
      * @return The map having all the restaurants
      */
     @Override
@@ -53,34 +86,13 @@ public class RestaurantServiceImpl implements RestaurantService {
     /**
      * {@inheritDoc}
      *
-     * @param restaurantMap Represents all the {@link Restaurant}
+     * @param food Represents the current {@link Food} selected by the user
+     * @param quantity Represents the quantity of the food given by the current user
+     * @return Available quantity from the selected restaurant
      */
     @Override
-    public boolean createRestaurants(final Map<Integer, Restaurant> restaurantMap) {
-        restaurants.putAll(restaurantMap);
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param food Represents the current {@link Food}
-     * @param restaurant Represents the current {@link Restaurant}
-     */
-    @Override
-    public void createVegFood(final Food food, final Restaurant restaurant) {
-        restaurant.createVegMenucard(food);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param food Represents the current {@link Food}
-     * @param restaurant Represents the current {@link Restaurant}
-     */
-    @Override
-    public void createNonVegFood(final Food food, final Restaurant restaurant) {
-        restaurant.createNonVegMenucard(food);
+    public int getQuantity(final Food food, final int quantity) {
+        return food.getFoodQuantity();
     }
 
     /**

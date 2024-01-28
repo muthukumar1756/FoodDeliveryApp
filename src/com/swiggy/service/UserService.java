@@ -1,6 +1,7 @@
 package com.swiggy.service;
 
 import com.swiggy.model.User;
+import com.swiggy.view.UserDataUpdateType;
 
 /**
  * <p>
@@ -35,51 +36,12 @@ public interface UserService {
 
     /**
      * <p>
-     * Checks for the user is already exist or not.
-     * </p>
-     *
-     * @param phoneNumber Represents the phone_number of the current user
-     * @return True if the user is exist, false otherwise
-     */
-    boolean isUserExist(final String phoneNumber);
-
-    /**
-     * <p>
-     * Updates the user_name of the current user.
+     * Updates the data of the current user.
      * </p>
      *
      * @param user Represents the current {@link User}
-     * @param userName Represents the name of the current user
+     * @param userData Represents the data of the current user to be updated
+     * @param type Represents the type of data of the current user to be updated
      */
-    void updateUserName(final User user, final String userName);
-
-    /**
-     * <p>
-     * Updates the user_name of the current user.
-     * </p>
-     *
-     * @param user Represents the current {@link User}
-     * @param phoneNumber Represents the name of the current user
-     */
-    void updateUserPhoneNumber(final User user, final String phoneNumber);
-
-    /**
-     * <p>
-     * Updates the user_name of the current user.
-     * </p>
-     *
-     * @param user Represents the current {@link User}
-     * @param emailId Represents the name of the current user
-     */
-    void updateUserEmailId(final User user, final String emailId);
-
-    /**
-     * <p>
-     * Updates the user_name of the current user.
-     * </p>
-     *
-     * @param user Represents the current {@link User}
-     * @param password Represents the name of the current user
-     */
-    void updateUserPassword(final User user, final String password);
+    void updateUser(final User user, final String userData, final UserDataUpdateType type);
 }

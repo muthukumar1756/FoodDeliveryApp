@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * <p>
- * Handles the restaurant related operation and responsible for receiving user input and processing it
+ * Handles the restaurant related operation and responsible for receiving user input and processing it.
  * </p>
  *
  * @author Muthu kumar V
@@ -43,10 +43,32 @@ public class RestaurantController {
 
     /**
      * <p>
-     * Gets all the restaurants
+     * Creates all the restaurants.
      * </p>
      *
-     * @return The map having all the restaurants.
+     * @param restaurants Represents all the {@link Restaurant}
+     */
+    public boolean loadRestaurants(final Map<Integer, Restaurant> restaurants) {
+        return restaurantService.loadRestaurants(restaurants);
+    }
+
+    /**
+     * <p>
+     * Creates the menucard for the restaurant.
+     * </p>
+     *
+     * @param menuCard Contains the list of foods in the restaurant
+     */
+    public void loadMenuCard(final Map<Food, Restaurant> menuCard) {
+        restaurantService.loadMenuCard(menuCard);
+    }
+
+    /**
+     * <p>
+     * Gets all the restaurants.
+     * </p>
+     *
+     * @return The map having all the restaurants
      */
     public Map<Integer, Restaurant> getRestaurants(){
         return restaurantService.getRestaurants();
@@ -54,37 +76,15 @@ public class RestaurantController {
 
     /**
      * <p>
-     * Creates all the restaurants.
+     * Gets the available food quantity in the restaurant .
      * </p>
      *
-     * @param restaurants Represents all the {@link Restaurant}
+     * @param food Represents the current {@link Food} selected by the user
+     * @param quantity Represents the quantity of the food given by the current user
+     * @return Available quantity from the selected restaurant
      */
-    public boolean createRestaurants(final Map<Integer, Restaurant> restaurants) {
-        return restaurantService.createRestaurants(restaurants);
-    }
-
-    /**
-     * <p>
-     * Creates all the veg foods.
-     * </p>
-     *
-     * @param food Represents the current {@link Food}
-     * @param restaurant Represents the current {@link Restaurant}
-     */
-    public void createVegFood(final Food food, final Restaurant restaurant) {
-        restaurantService.createVegFood(food, restaurant);
-    }
-
-    /**
-     * <p>
-     * Creates all the nonveg foods.
-     * </p>
-     *
-     * @param food Represents the current {@link Food}
-     * @param restaurant Represents the current {@link Restaurant}
-     */
-    public void createNonVegFood(final Food food, final Restaurant restaurant) {
-        restaurantService.createNonVegFood(food, restaurant);
+    public int getQuantity(final Food food, final int quantity) {
+        return restaurantService.getQuantity(food, quantity);
     }
 
     /**

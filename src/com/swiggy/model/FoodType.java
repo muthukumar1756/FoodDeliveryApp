@@ -18,6 +18,14 @@ public enum FoodType {
         this.id = id;
     }
 
+    /**
+     * <p>
+     * Gets the food category with the id.
+     * </p>
+     *
+     * @param id Represents the id of the food category
+     * @return The category type if the id matches, null otherwise
+     */
     public static FoodType getById(final int id) {
         for (FoodType type : values()) {
 
@@ -28,6 +36,11 @@ public enum FoodType {
         return null;
     }
 
+    /**
+     *
+     * @param foodType Represents the category of the food
+     * @return The id of the food category
+     */
     public static int getId(FoodType foodType) {
         return foodType.id;
     }

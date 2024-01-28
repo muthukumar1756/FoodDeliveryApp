@@ -1,5 +1,7 @@
 package com.swiggy.view;
 
+import org.apache.log4j.Logger;
+
 import com.swiggy.controller.UserController;
 import com.swiggy.model.User;
 import com.swiggy.model.PasswordGenerator;
@@ -17,13 +19,14 @@ public class UserView extends CommonView{
 
     private static UserView userView;
 
+    private final Logger logger;
     private final UserController userController;
     private final UserDataValidator userDataValidator;
 
     private UserView() {
+        logger = Logger.getLogger(UserView.class);
         userController = UserController.getInstance();
         userDataValidator = UserDataValidator.getInstance();
-        PasswordGenerator passwordGenerator = PasswordGenerator.getInstance();
     }
 
     /**
@@ -47,7 +50,7 @@ public class UserView extends CommonView{
      * </p>
      */
     public void displayMainMenu() {
-        printMessage("1.Signup\n2.Login\n3.Exit");
+        logger.info("\n1.Signup\n2.Login\n3.Exit");
         final int userChoice = getChoice();
 
         switch (userChoice) {
@@ -61,7 +64,7 @@ public class UserView extends CommonView{
                 exit();
                 break;
             default:
-                printMessage("Invalid UserChoice");
+                logger.warn("Invalid UserChoice");
                 displayMainMenu();
         }
     }
@@ -72,13 +75,13 @@ public class UserView extends CommonView{
      * </p>
      */
     private void signUp() {
-        printMessage("User Signup Or Enter * To Go Back");
+        logger.info("User Signup Or Enter * To Go Back");
         final User user = new User(getName(), getPhoneNumber(), getEmailId(), getPassword());
 
         if (userController.createUser(user)) {
             displayHomePageMenu(user);
         } else {
-            printMessage("The User Already Exists");
+            logger.warn("User Already Exists");
             displayMainMenu();
         }
     }
@@ -91,15 +94,13 @@ public class UserView extends CommonView{
      * @return The valid username of the user
      */
     private String getName() {
-        printMessage("Enter Your Name");
+        logger.info("Enter Your Name");
         final String name = getInfo();
 
-        if ("back".equals(name)) {
-            displayMainMenu();
-        }
+        backOptionCheck(name);
 
         if (!userDataValidator.validateUserName(name)) {
-            printMessage("Enter A Valid User Name");
+            logger.warn("Enter A Valid User Name");
             getName();
         }
 
@@ -114,15 +115,13 @@ public class UserView extends CommonView{
      * @return The mobile number of the user
      */
     private String getPhoneNumber() {
-        printMessage("Enter Your Phone Number");
+        logger.info("Enter Your Phone Number");
         final String phoneNumber = getInfo();
 
-        if ("back".equals(phoneNumber)) {
-            displayMainMenu();
-        }
+        backOptionCheck(phoneNumber);
 
         if (!userDataValidator.validatePhoneNumber(phoneNumber)) {
-            printMessage("Enter A Valid Phone Number");
+            logger.warn("Enter A Valid Phone Number");
             getPhoneNumber();
         }
 
@@ -137,15 +136,13 @@ public class UserView extends CommonView{
      * @return The valid email of the user
      */
     private String getEmailId() {
-        printMessage("Enter Your EmailId");
+        logger.info("Enter Your EmailId");
         final String emailId = getInfo();
 
-        if ("back".equals(emailId)) {
-            displayMainMenu();
-        }
+        backOptionCheck(emailId);
 
         if (!userDataValidator.validateEmailId(emailId)) {
-            printMessage("Enter A Valid EmailId");
+            logger.warn("Enter A Valid EmailId");
             getEmailId();
         }
 
@@ -160,19 +157,30 @@ public class UserView extends CommonView{
      * @return The validated password of the user
      */
     private String getPassword() {
-        printMessage("Enter Your Password");
+        logger.info("Enter Your Password");
         final String password = getInfo();
 
-        if ("back".equals(password)) {
-            displayMainMenu();
-        }
+        backOptionCheck(password);
 
         if (!userDataValidator.validatePassword(password)) {
-            printMessage("Enter A Valid Password");
+            logger.warn("Enter A Valid Password");
             getPassword();
         }
 
-        return password;
+        return PasswordGenerator.getInstance().hashPassword(password);
+    }
+
+    /**
+     * <p>
+     * Checks for the back option
+     * </p>
+     *
+     * @param back Represents the input to checked for the back option
+     */
+    private void backOptionCheck(final String back) {
+        if ("back".equals(back)) {
+            displayMainMenu();
+        }
     }
 
     /**
@@ -182,19 +190,13 @@ public class UserView extends CommonView{
      */
      private void login() {
         final String phoneNumber = getPhoneNumber();
+        final User currentUser = userController.getUser(phoneNumber, getPassword());
 
-         if (userController.isUserExist(phoneNumber)) {
-             final User currentUser = userController.getUser(phoneNumber, getPassword());
-
-             if (null == currentUser) {
-                 printMessage("Incorrect Password");
-                 login();
-             }
-             displayHomePageMenu(currentUser);
-         } else {
-             printMessage("The Entered Phone Number Is Not Registered!");
-             login();
-         }
+        if (null == currentUser) {
+            logger.warn("User Not Registered or Incorrect Password");
+            login();
+        }
+        displayHomePageMenu(currentUser);
     }
 
     /**
@@ -205,7 +207,7 @@ public class UserView extends CommonView{
      * @param user Represents the current {@link User}
      */
     public void displayHomePageMenu(final User user) {
-        printMessage("To Go Back Enter *\n1.Display Restaurants\n2.Edit User Profile\n3.Logout");
+        logger.info("To Go Back Enter *\n1.Display Restaurants\n2.Edit User Profile\n3.Logout");
         final int userChoice = getChoice();
 
         if (-1 == userChoice) {
@@ -223,9 +225,25 @@ public class UserView extends CommonView{
                 displayMainMenu();
                 break;
             default:
-                printMessage("Enter A Valid Option");
+                logger.warn("Enter A Valid Option");
                 displayHomePageMenu(user);
         }
+    }
+
+    /**
+     * <p>
+     * Displays the data of current user.
+     * </p>
+     *
+     * @param user Represents the current {@link User}
+     */
+    private void displayUserData(final User user) {
+        final User currentUser = userController.getUser(user.getPhoneNumber(), user.getPassword());
+
+        logger.info("\nYour Current Data\n");
+        logger.info(String.format("User Name : %s", currentUser.getName()));
+        logger.info(String.format("Phone Number : %s", currentUser.getPhoneNumber()));
+        logger.info(String.format("Email Id : %s", currentUser.getEmailId()));
     }
 
     /**
@@ -236,7 +254,8 @@ public class UserView extends CommonView{
      * @param user Represents the current {@link User}
      */
     private void updateUser(final User user) {
-        printMessage("To Go Back Enter *\n1.Update EmailId\n2.Update Phone Number\n3.Update Password\n4.Update User Name");
+        displayUserData(user);
+        logger.info("\n1.Update Name\n2.Update Phone Number\n3.Update EmailId\n4.Update Password");
         final int choice = getChoice();
 
         if (-1 == choice) {
@@ -245,19 +264,19 @@ public class UserView extends CommonView{
 
         switch (choice) {
             case 1:
-                userController.updateEmailId(user, getEmailId());
+                userController.updateUser(user, getName(), UserDataUpdateType.NAME);
                 break;
             case 2:
-                userController.updatePhoneNumber(user, getPhoneNumber());
+                userController.updateUser(user, getPhoneNumber(), UserDataUpdateType.PHONENUMBER);
                 break;
             case 3:
-                userController.updatePassword(user, getPassword());
+                userController.updateUser(user, getEmailId(), UserDataUpdateType.EMAILID);
                 break;
             case 4:
-                userController.updateUserName(user, getName());
+                userController.updateUser(user, getPassword(), UserDataUpdateType.PASSWORD );
                 break;
             default:
-                printMessage("Enter A Valid Option");
+                logger.warn("Enter A Valid Option");
                 updateUser(user);
         }
         updateUser(user);

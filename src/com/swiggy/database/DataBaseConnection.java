@@ -14,10 +14,11 @@ import java.sql.SQLException;
  */
 public class DataBaseConnection {
 
-    private static Connection connection;
     private static final String url = "jdbc:postgresql://localhost/com.swiggy";
     private static final String user = "postgres";
     private static final String password = "123";
+
+    private static Connection connection;
 
     private DataBaseConnection(){
     }
