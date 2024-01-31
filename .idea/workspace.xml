@@ -5,113 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83c95de4-b783-446c-b7a8-680bcf690af5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/swiggy/launcher/RestaurantInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/postgresql_42_7_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/postgresql_42_7_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/RestaurantInitializer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/SwiggyActivator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/controller/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/controller/OrderController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/controller/RestaurantController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/controller/RestaurantController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/customexception/CartNotFoundException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/customexception/CartUpdateException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/customexception/FileAccessException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/customexception/FoodCreationException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/customexception/HashAlgorithmNotFoundException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/customexception/MenuCardNotFoundException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/customexception/PlaceOrderException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/customexception/RestaurantCreationException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/customexception/UserCreationException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/customexception/UserNotFoundException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/customexception/UserUpdateException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/dao/CartDAO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/dao/OrderDAO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/dao/RestaurantDAO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/dao/UserDAO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/dao/impl/CartDAOImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/dao/impl/OrderDAOImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/dao/impl/RestaurantDAOImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/dao/impl/UserDAOImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/database/DataBaseConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/database/DataBaseConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/model/FoodType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/model/FoodType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/model/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/model/Order.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/model/PasswordGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/model/PasswordGenerator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/model/Restaurant.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/model/Restaurant.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/out/production/swiggy/com/swiggy/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/out/production/swiggy/com/swiggy/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/out/production/swiggy/com/swiggy/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/out/production/swiggy/com/swiggy/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/out/production/swiggy/com/swiggy/swiggy.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/OrderService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/RestaurantService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/RestaurantService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/impl/CartServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/impl/CartServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/impl/OrderServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/impl/OrderServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/impl/RestaurantServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/impl/RestaurantServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/impl/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/impl2/CartServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/impl2/CartServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/impl2/OrderServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/impl2/OrderServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/impl2/RestaurantServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/impl2/RestaurantServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/impl2/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/service/impl2/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/view/CartView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/view/CartView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/view/CommonView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/view/CommonView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/view/OrderView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/view/OrderView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/view/RestaurantView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/view/RestaurantView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/view/UserView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/view/UserView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/view/validation/UserDataValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FoodDeliveryApp/com/swiggy/view/validation/UserDataValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/RestaurantInitializer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/SwiggyActivator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/launcher/SwiggyActivator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/controller/CartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/controller/RestaurantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/controller/RestaurantController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/customexception/CartNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/exception/CartNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/customexception/CartUpdateException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/exception/CartUpdateException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/customexception/FileAccessException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/exception/FileAccessException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/customexception/FoodCreationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/exception/FoodCreationException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/customexception/HashAlgorithmNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/exception/HashAlgorithmNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/customexception/MenuCardNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/exception/MenuCardNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/customexception/PlaceOrderException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/exception/PlaceOrderException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/customexception/RestaurantCreationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/exception/RestaurantCreationException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/customexception/UserCreationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/exception/UserCreationException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/customexception/UserNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/exception/UserNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/customexception/UserUpdateException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/exception/UserUpdateException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/dao/CartDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/datahandler/CartDataHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/dao/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/datahandler/OrderDataHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/dao/RestaurantDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/datahandler/RestaurantDataHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/datahandler/UserDataHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/dao/impl/CartDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/datahandler/impl/CartDataHandlerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/dao/impl/OrderDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/datahandler/impl/OrderDataHandlerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/dao/impl/RestaurantDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/datahandler/impl/RestaurantDataHandlerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/dao/impl/UserDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/datahandler/impl/UserDataHandlerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/database/DataBaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/database/DataBaseConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/model/FoodType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/model/FoodType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/model/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/model/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/model/PasswordGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/model/PasswordGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/model/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/model/Restaurant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/out/production/swiggy/com/swiggy/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/out/production/swiggy/com/swiggy/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/out/production/swiggy/com/swiggy/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/out/production/swiggy/com/swiggy/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/out/production/swiggy/com/swiggy/swiggy.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/service/RestaurantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/service/RestaurantService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/service/impl/CartServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/service/impl/CartServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/service/impl/OrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/service/impl/RestaurantServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/service/impl/RestaurantServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/service/impl2/CartServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/service/impl2/CartServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/service/impl2/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/service/impl2/OrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/service/impl2/RestaurantServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/service/impl2/RestaurantServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/service/impl2/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/service/impl2/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/view/CartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/view/CartView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/view/CommonView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/view/CommonView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/view/OrderView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/view/OrderView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/view/RestaurantView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/view/RestaurantView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/view/UserView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/view/UserView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/swiggy/view/validation/UserDataValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/swiggy/view/validation/UserDataValidator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +44,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/demo/libs/log4j-1.2.17.jar&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Global Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
